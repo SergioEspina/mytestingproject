@@ -13,7 +13,7 @@ public class CoordinateTest {
 		assertEquals(res, true);
 		
 		res = cord.checkCoords(-1, 1);
-		assertEquals(res, true);
+		assertEquals(res, false);
 	}
 
 }
