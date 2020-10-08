@@ -24,7 +24,7 @@ public class Coordinate {
 	}
 	
 	public boolean checkCoords(int x, int y) {
-		if (x<1 || y<1) {
+		if (x<0 || y<0) {
 			return false;
 		}
 		return true;
