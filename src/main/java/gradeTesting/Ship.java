@@ -2,37 +2,42 @@ package gradeTesting;
 
 import java.util.ArrayList;
 
+enum Orientation{
+	HORIZONTAL,
+	VERTICAL,
+	DIAGONAL
+}
+
 public class Ship {
-	
+
 	private int width;
 	private ArrayList<Coordinate> positions;
+	private Orientation o;
 
-	public Ship(int width, ArrayList<Coordinate> positions) {
+	public Ship(int width, ArrayList<Coordinate> positions) throws Exception {
 		
-		// TODO Auto-generated constructor stub
-		checkOrientation(positions);
+		if(width < 0 || positions == null || width != positions.size() )
+			throw new Exception("Ship is not well formed");
+		 
+		this.positions = positions;
 		
+		o = checkOrientation(positions);
+		if(o==null)
+			throw new Exception("Ship doesn't follow the orientation pattern");
 		this.width = width;
 		this.positions = positions;
 	}
 
-	public boolean checkOrientation(ArrayList<Coordinate> positions) {
-		
-		Coordinate pos = positions.get(0);
-		boolean x = false;
-		int accumulate;
-		for(int i = 1; i < positions.size(); i++) {
-			if (pos.getX() == positions.get(i).getX()) {
-				accumulate = pos.getX();
-				x = true;
-			}else if(pos.getY() == positions.get(i).getY()){
-				accumulate = pos.getY();
-				x = false;
-			}else {
-				return false;
-			}
-		}
-		return true;
+	public Orientation checkOrientation(ArrayList<Coordinate> positions) {
+
+		if(isVertical()) {
+			return Orientation.VERTICAL;
+		}else if(isHorizontal()) {
+			return Orientation.HORIZONTAL;
+		}else if(isDiagonal()) {
+			return Orientation.DIAGONAL;
+		}else
+			return null;
 	}
 	
 	private boolean isInBoundaries() {
@@ -44,7 +49,7 @@ public class Ship {
 		int lastY = positions.get(0).getY();
 		boolean isVertical = true;
 		
-		for (int i = 1; i<positions.size(); i++) {
+		for (int i = 1; i<width; i++) {
 
 			int currX = positions.get(i).getX();
 			int currY = positions.get(i).getY();
@@ -66,7 +71,7 @@ public class Ship {
 		int lastY = positions.get(0).getY();
 		boolean isHorizontal = true;
 		
-		for (int i = 1; i<positions.size(); i++) {
+		for (int i = 1; i<width; i++) {
 
 			int currX = positions.get(i).getX();
 			int currY = positions.get(i).getY();
@@ -88,7 +93,7 @@ public class Ship {
 		int lastY = positions.get(0).getY();
 		boolean isDiagonal = true;
 		
-		for (int i = 1; i<positions.size(); i++) {
+		for (int i = 1; i<width; i++) {
 
 			int currX = positions.get(i).getX();
 			int currY = positions.get(i).getY();
