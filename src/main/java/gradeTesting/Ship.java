@@ -13,6 +13,7 @@ public class Ship {
 	private int width;
 	private ArrayList<Coordinate> positions;
 	private Orientation o;
+	private ArrayList<Coordinate> remainingParts;
 
 	public Ship(int width, ArrayList<Coordinate> positions) throws Exception {
 		
@@ -26,6 +27,7 @@ public class Ship {
 			throw new Exception("Ship doesn't follow the orientation pattern");
 		this.width = width;
 		this.positions = positions;
+		remainingParts = new ArrayList<Coordinate>();
 	}
 
 	public Orientation checkOrientation(ArrayList<Coordinate> positions) {
