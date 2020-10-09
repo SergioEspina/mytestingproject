@@ -112,5 +112,25 @@ public class Ship {
 		return isDiagonal;
 	}
 	
+	public boolean touch(Coordinate c) {
+		boolean touched = false;
+		for(Coordinate cord : remainingParts) {
+			if(cord.getX() == c.getX() && cord.getY() == c.getY()) {
+				touched = true;
+				break;
+			}
+		}
+		
+		return touched;
+	}
+	
+	public boolean isAlive() {
+		return remainingParts.size() > 0;
+	}
+	
+	public boolean isTouched() {
+		return remainingParts.size() == width;
+	}
+	
 	
 }
