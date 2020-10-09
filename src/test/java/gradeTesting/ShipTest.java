@@ -100,7 +100,38 @@ public class ShipTest {
 	}
 	
 	@Test
-	public void testTouched() {
+	public void testTouched() throws Exception {
+		int width = 3;
+		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
+		
+		positions.add(new Coordinate(3,3));
+		positions.add(new Coordinate(3,4));
+		positions.add(new Coordinate(3,5));
+		
+		Ship s = s = new Ship(width, positions);
+		
+		assertEquals(s.touch(new Coordinate(5,20)), false);
+		assertEquals(s.isTouched(), false);
+		
+		assertEquals(s.touch(new Coordinate(3,3)), true);
+		
+		assertEquals(s.touch(new Coordinate(3,4)), true);
+		
+		assertEquals(s.touch(new Coordinate(4,3)), false);
+		
+		assertEquals(s.touch(new Coordinate(0,0)), false);
+		
+		assertEquals(s.touch(new Coordinate(30,10)), false);
+		
+		assertEquals(s.isAlive(), true);
+		
+		assertEquals(s.isTouched(), true);
+		
+		assertEquals(s.touch(new Coordinate(3,5)), true);
+		
+		assertEquals(s.isTouched(), true);
+		
+		assertEquals(s.isAlive(), false);
 		
 	}
 

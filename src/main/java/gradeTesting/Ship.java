@@ -27,7 +27,9 @@ public class Ship {
 			throw new Exception("Ship doesn't follow the orientation pattern");
 		this.width = width;
 		this.positions = positions;
-		remainingParts = new ArrayList<Coordinate>();
+		remainingParts = (ArrayList<Coordinate>) positions.clone();
+		
+		
 	}
 
 	public Orientation checkOrientation(ArrayList<Coordinate> positions) {
@@ -114,12 +116,21 @@ public class Ship {
 	
 	public boolean touch(Coordinate c) {
 		boolean touched = false;
-		for(Coordinate cord : remainingParts) {
+		int i;
+		for( i = 0; i< remainingParts.size(); i++) {
+			
+			Coordinate cord = remainingParts.get(i);
+			/*System.out.println("cordX: " + cord.getX() + ", cX " + c.getX());
+			System.out.println("cordY: " + cord.getY() + ", cY " + c.getY());*/
 			if(cord.getX() == c.getX() && cord.getY() == c.getY()) {
+				
 				touched = true;
 				break;
 			}
 		}
+		if(touched)
+			remainingParts.remove(i);
+		
 		
 		return touched;
 	}
@@ -129,7 +140,7 @@ public class Ship {
 	}
 	
 	public boolean isTouched() {
-		return remainingParts.size() == width;
+		return remainingParts.size() != width;
 	}
 	
 	
