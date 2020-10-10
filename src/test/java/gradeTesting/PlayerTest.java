@@ -12,16 +12,30 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void test() {
+	public void test() throws Exception {
 		Player p = new Player();
 		
 		//create ship
+		p.createShips();
+		//readint
 		
+		//readcoord
 		
 		//attack
 		
-		//attacked
 		
+		//attacked
+		assertEquals(p.attacked(new Coordinate(3,3)),true);
+		assertEquals(p.attacked(new Coordinate(7,7)),false);
+		assertEquals(p.attacked(new Coordinate(3,4)),true);
+		assertEquals(p.attacked(new Coordinate(3,6)),false);
+		assertEquals(p.attacked(new Coordinate(3,3)),true);
+		
+		assertEquals(p.isAlive(),true);
+		
+		assertEquals(p.attacked(new Coordinate(3,5)),true);
+		
+		assertEquals(p.isAlive(),false);
 		//hasShips
 		
 		
