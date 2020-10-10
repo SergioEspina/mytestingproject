@@ -15,7 +15,28 @@ public class Player {
 		isAlive = true;
 	}
 	
-	public void addShips(ArrayList<Integer> widths, ArrayList<ArrayList<Coordinate>> cords) throws Exception {
+	public void createShips() throws Exception {
+		Scanner in = new Scanner(System.in);
+		
+		int n = readInt("enter number of ships: ", "number of ships must be an integer and greater than 0");
+		
+		for(int i=0; i<n; i++) {
+			int width = readInt("enter number of ship's positions: ", "number of positions must be an integer and greater than 0");
+			ArrayList<Coordinate> coords = new ArrayList<Coordinate> ();
+			for(int j = 0; j<width; j++) {
+				coords.add(readCoord());
+			}
+			addShip(width, coords);
+		}
+		
+		 
+	}
+	
+	private void addShip(int width, ArrayList<Coordinate> coord) throws Exception {
+		ships.add(new Ship(width, coord));
+	}
+	
+	private void addShips(ArrayList<Integer> widths, ArrayList<ArrayList<Coordinate>> cords) throws Exception {
 		if(widths.size() != cords.size())
 			throw new Exception("amount of widths and coords provide must be the same");
 		
@@ -26,6 +47,29 @@ public class Player {
 	}
 	
 	public Coordinate play() {
+		return readCoord();
+	}
+	
+	private int readInt(String message, String errorMsg) {
+		Scanner in = new Scanner(System.in);
+		
+		int n = 0;
+		while(n<=0) {
+			System.out.println(message);
+			try {
+				n = in.nextInt();
+				if(n <= 0)
+					throw new Exception("");
+			}catch(Exception e) {
+				System.out.println(errorMsg);
+			}
+		}
+		
+		in.close();
+		return n;
+	}
+	
+	private Coordinate readCoord() {
 		Scanner in = new Scanner(System.in);
 		String c = in.next();
 		Coordinate coord = null;
