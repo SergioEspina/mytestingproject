@@ -44,7 +44,33 @@ public class PlayerTest {
 		
 	}
 	
-	@Test //Test for the coords insert by player to make a ship in the board
+	@Test //Test for the coords with enemy atacked you, the coord was tested before if was valid or not
+	public void attacked() throws Exception {
+		Board b = new Board(12, 12);
+		Player p = new Player(b);
+		
+		//Create a ship
+		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
+		positions.add(new Coordinate(5,5));
+		positions.add(new Coordinate(5,6));
+		//put a ship in the board
+		p.addShip(2, positions);
+		
+		
+		assertEquals(p.attacked(new Coordinate(3,3)),false);
+		assertEquals(p.attacked(new Coordinate(7,7)),false);
+		assertEquals(p.attacked(new Coordinate(5,5)),true);
+		assertEquals(p.isAlive(),true);
+		
+		assertEquals(p.attacked(new Coordinate(3,6)),false);
+		assertEquals(p.attacked(new Coordinate(3,3)),false);
+		assertEquals(p.attacked(new Coordinate(5,6)),true);
+		
+		//assertEquals(p.isAlive(), false); for tomorrow
+		
+	}
+	
+	@Test //Test for the coords insert by player to make a ship in the board, white box??
 	public void testCheckCoordsBoards() throws Exception {
 		Board b = new Board(12, 12);
 		Player p = new Player(b);

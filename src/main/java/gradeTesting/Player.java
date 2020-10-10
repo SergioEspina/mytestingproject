@@ -35,18 +35,16 @@ public class Player {
 		 
 	}
 	
-	private void addShip(int width, ArrayList<Coordinate> coord) throws Exception {
-		ships.add(new Ship(width, coord));
-	}
-	
-	private void addShips(ArrayList<Integer> widths, ArrayList<ArrayList<Coordinate>> cords) throws Exception {
-		if(widths.size() != cords.size())
-			throw new Exception("amount of widths and coords provide must be the same");
+	public void addShip(int width, ArrayList<Coordinate> coord) throws Exception {
 		
-		for(int i=0; i<widths.size(); i++) {
-			ships.add(new Ship(widths.get(i), cords.get(i)));
-			remShips.add(new Ship(widths.get(i), cords.get(i)));
+		for(int i = 0; i < coord.size(); i++) {
+			if(!checkCoordsBoards(coord.get(i).getX(), coord.get(i).getY())) throw new Exception("Coords not correct");
 		}
+		
+		Ship boat = new Ship(width, coord);
+		ships.add(boat);
+		remShips.add(boat);
+		//afegir al taulell
 	}
 	
 	public Coordinate play() {
@@ -95,13 +93,13 @@ public class Player {
 		for(i=0; i<remShips.size(); i++) {
 			touched = remShips.get(i).touch(c);
 			if(touched) {
+				if (!remShips.get(i).isAlive()) remShips.remove(i);
+				//System.out.println("Ship sunk");
 				break;
 			}
 				
 		}
 		
-		if (!remShips.get(i).isAlive())
-			remShips.remove(i);
 		return touched;
 	}
 	
