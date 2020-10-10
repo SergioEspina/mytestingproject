@@ -8,11 +8,13 @@ public class Player {
 	private ArrayList<Ship> ships;
 	private ArrayList<Ship> remShips;
 	private boolean isAlive;
+	private Board board;
 	
-	public Player() {
+	public Player(Board board) {
 		ships = new ArrayList<Ship>();
 		remShips = new ArrayList<Ship>();
 		isAlive = true;
+		this.board = board;
 	}
 	
 	public void createShips() throws Exception {
@@ -107,5 +109,19 @@ public class Player {
 		return isAlive;
 	}
 	
+	public boolean checkCoordsBoards(int x, int y) {
+		
+		if (x<0 || y<0) {
+			return false;
+		}else if(x > board.getRowSize()){
+			return false;
+		}else if(y > board.getColSize()){
+			return false;
+		}else if(board.getBoard()[x][y] != null) {
+			return false;
+		}
+		
+		return true;
+	}
 	
 }

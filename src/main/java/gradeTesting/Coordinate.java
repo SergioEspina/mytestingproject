@@ -10,7 +10,6 @@ public class Coordinate {
 	
 	public Coordinate(int i, int j) {
 		// TODO Auto-generated constructor stub
-		checkCoords(i, j);
 		x = i;
 		y = j;
 	}
@@ -23,10 +22,4 @@ public class Coordinate {
 		return y;
 	}
 	
-	public boolean checkCoords(int x, int y) {
-		if (x<0 || y<0) {
-			return false;
-		}
-		return true;
-	}
 }
