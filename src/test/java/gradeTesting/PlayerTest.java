@@ -66,7 +66,7 @@ public class PlayerTest {
 		assertEquals(p.attacked(new Coordinate(3,3)),false);
 		assertEquals(p.attacked(new Coordinate(5,6)),true);
 		
-		//assertEquals(p.isAlive(), false); for tomorrow
+		assertEquals(p.isAlive(), false);
 		
 	}
 	

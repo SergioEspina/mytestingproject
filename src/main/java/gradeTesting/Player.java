@@ -100,6 +100,9 @@ public class Player {
 				
 		}
 		
+		if(remShips.size() < 1)
+			isAlive = false;
+		
 		return touched;
 	}
 	
