@@ -23,6 +23,7 @@ public class Game {
 	
 	public void createPlayer() {
 		Board b = new Board(boardRows, boardCols);
+
 		Player p = new Player(players.size()+1, b);
 		
 		Scanner in = new Scanner(System.in);
@@ -68,6 +69,9 @@ public class Game {
 		
 	
 	}
+
+		
+
 		
 	public void play() {
 		int turn = 0;
