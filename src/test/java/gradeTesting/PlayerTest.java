@@ -81,6 +81,8 @@ public class PlayerTest {
 		positions.add(new Coordinate(5,6));
 		//put a ship in the board
 		p.addShip(2, positions);
+		p.attacked(new Coordinate(5,5));
+		p.getBoard().print();
 		
 		boolean equals = true;
 		for(int i=0; i<12; i++) {

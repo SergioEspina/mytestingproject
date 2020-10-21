@@ -147,5 +147,18 @@ public class Ship {
 		return remainingParts.size() != width;
 	}
 	
+	public boolean isTouched(Coordinate c) {
+		boolean result = true;
+		for(Coordinate co : remainingParts) {
+			if(co.getX() == c.getX() && co.getY() == c.getY()) {
+				result = false;
+				break;
+			}
+		}
+		
+		return result;
+			
+	}
+	
 	
 }
