@@ -9,12 +9,18 @@ public class Player {
 	private ArrayList<Ship> remShips;
 	private boolean isAlive;
 	private Board board;
+	private int playerNumber;
 	
-	public Player(Board board) {
+	public Player(int playerNumber, Board board) {
 		ships = new ArrayList<Ship>();
 		remShips = new ArrayList<Ship>();
 		isAlive = true;
 		this.board = board;
+		this.playerNumber = playerNumber;
+	}
+	
+	public int getPlayerNumber() {
+		return playerNumber;
 	}
 	
 	

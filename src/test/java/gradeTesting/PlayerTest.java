@@ -16,7 +16,7 @@ public class PlayerTest {
 	//@Test
 	public void test() throws Exception {
 		Board b = new Board(12, 12);
-		Player p = new Player(b);
+		Player p = new Player(0, b);
 		
 		//create ship
 		
@@ -47,7 +47,7 @@ public class PlayerTest {
 	@Test //Test for the coords with enemy atacked you, the coord was tested before if was valid or not
 	public void attacked() throws Exception {
 		Board b = new Board(12, 12);
-		Player p = new Player(b);
+		Player p = new Player(0, b);
 		
 		//Create a ship
 		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
@@ -73,7 +73,7 @@ public class PlayerTest {
 	@Test
 	public void checkBoard() throws Exception {
 		Board b = new Board(12, 12);
-		Player p = new Player(b);
+		Player p = new Player(0, b);
 		
 		//Create a ship
 		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
@@ -107,7 +107,7 @@ public class PlayerTest {
 	@Test //Test for the coords insert by player to make a ship in the board, white box??
 	public void testCheckCoordsBoards() throws Exception {
 		Board b = new Board(12, 12);
-		Player p = new Player(b);
+		Player p = new Player(0, b);
 		
 		//Create a ship
 		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
