@@ -17,6 +17,8 @@ public class Player {
 		this.board = board;
 	}
 	
+	
+	
 	public void createShips() throws Exception {
 		Scanner in = new Scanner(System.in);
 		
@@ -32,9 +34,13 @@ public class Player {
 		}
 		
 		in.close();
-		 
+		
+
 	}
 	
+	public Board getBoard() {
+		return board;
+	}
 	public void addShip(int width, ArrayList<Coordinate> coord) throws Exception {
 		
 		for(int i = 0; i < coord.size(); i++) {
@@ -45,6 +51,13 @@ public class Player {
 		ships.add(boat);
 		remShips.add(boat);
 		//afegir al taulell
+		
+		
+		ArrayList<Coordinate> shipPos = boat.getPositions();
+		
+		for(Coordinate shipC : shipPos) {
+			board.getBoard()[shipC.getX()][shipC.getY()] = boat;
+		}
 	}
 	
 	public Coordinate play() {

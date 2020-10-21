@@ -10,6 +10,16 @@ public class Board {
 		board = new Ship[x][y];
 		colSize = y-1;
 		rowSize = x-1;
+		
+		initBoard();
+	}
+	
+	private void initBoard() {
+		for(int i=0; i<=rowSize; i++) {
+			for(int j=0; j<=colSize; j++) {
+				board[i][j]= null;
+			}
+		}
 	}
 	
 	public int getRowSize() {

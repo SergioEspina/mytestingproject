@@ -70,6 +70,38 @@ public class PlayerTest {
 		
 	}
 	
+	@Test
+	public void checkBoard() throws Exception {
+		Board b = new Board(12, 12);
+		Player p = new Player(b);
+		
+		//Create a ship
+		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
+		positions.add(new Coordinate(5,5));
+		positions.add(new Coordinate(5,6));
+		//put a ship in the board
+		p.addShip(2, positions);
+		
+		boolean equals = true;
+		for(int i=0; i<12; i++) {
+			for(int j=0; j<12; j++) {
+				Ship shipXY = p.getBoard().getBoard()[i][j];
+				if(((i == 5 && j == 5) || (i == 5 && j == 6) )) {
+					if(shipXY == null)
+						equals = false;
+					
+				}else {
+					equals = shipXY == null;
+				}
+				if(!equals) break;
+			}
+			if(!equals) break;
+		}
+		
+		assertEquals(equals,true);
+		
+	}
+	
 	@Test //Test for the coords insert by player to make a ship in the board, white box??
 	public void testCheckCoordsBoards() throws Exception {
 		Board b = new Board(12, 12);

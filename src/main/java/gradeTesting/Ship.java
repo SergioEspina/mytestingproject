@@ -31,6 +31,10 @@ public class Ship {
 		
 		
 	}
+	
+	public ArrayList<Coordinate> getPositions(){
+		return positions;
+	}
 
 	public Orientation checkOrientation(ArrayList<Coordinate> positions) {
 
