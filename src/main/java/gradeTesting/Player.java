@@ -9,6 +9,7 @@ public class Player {
 	private ArrayList<Ship> remShips;
 	private boolean isAlive;
 	private Board board;
+	private Board enemiBoard;
 	private int playerNumber;
 	
 	public Player(int playerNumber, Board board) {
@@ -17,6 +18,7 @@ public class Player {
 		isAlive = true;
 		this.board = board;
 		this.playerNumber = playerNumber;
+		enemiBoard = new Board(board.getRowSize()+1, board.getColSize()+1);
 	}
 	
 	public int getPlayerNumber() {
@@ -106,7 +108,12 @@ public class Player {
 		return coord;
 	}
 	
-	public boolean attacked(Coordinate c) {
+	public boolean attacked(Coordinate c) throws Exception {
+		
+		if(!checkCoordsBoards(c.getX(), c.getY())) {
+			throw new Exception("OutR");
+		}
+		
 		boolean touched = false;
 		int i;
 		for(i=0; i<remShips.size(); i++) {
@@ -142,6 +149,11 @@ public class Player {
 		}
 		
 		return true;
+	}
+	
+	public void setEnemi(Coordinate c){
+		if (c != null) enemiBoard.getBoard()[c.getX()][c.getY()] = new Ship();
+		
 	}
 	
 }

@@ -14,6 +14,10 @@ public class Ship {
 	private ArrayList<Coordinate> positions;
 	private Orientation o;
 	private ArrayList<Coordinate> remainingParts;
+	
+	public Ship() {
+		
+	}
 
 	public Ship(int width, ArrayList<Coordinate> positions) throws Exception {
 		

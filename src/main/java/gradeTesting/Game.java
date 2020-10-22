@@ -76,10 +76,10 @@ public class Game {
 	public void play() {
 		int turn = 0;
 		Scanner in = new Scanner(System.in);
+		Player p1 = players.get(0);
+		Player p2 = players.get(1);
 		
 		while(!isOver() && players.size()>1) {
-			System.out.println("Player " + turn+1 + "'s turn");
-			Player p = players.get(turn);
 			
 			try {
 				
@@ -87,14 +87,16 @@ public class Game {
 				System.out.println();
 				
 				String[] xy = in.nextLine().split(",");
-				boolean success = p.attacked(new Coordinate(Integer.parseInt(xy[0]), Integer.parseInt(xy[1])));
+				Coordinate attack = new Coordinate(Integer.parseInt(xy[0]), Integer.parseInt(xy[1]));
+				boolean success = p2.attacked(attack);
 				
 				if(success) {
+					p1.setEnemi(attack);
 					System.out.println("You hit a ship in position: " + xy[0] + "," + xy[1] );
 					
-					if(!p.isAlive()) {
+					if(!p2.isAlive()) {
 						players.remove(turn);
-						System.out.println("Player " + p.getPlayerNumber() + " was eliminated!");
+						System.out.println("Player " + p2.getPlayerNumber() + " was eliminated!");
 						over = players.size()<=1;
 					}
 					
@@ -102,9 +104,13 @@ public class Game {
 				
 				
 			}catch(Exception e) {
+				if(e.getMessage().equals("OutR"))
 				e.printStackTrace();
 			}
 			
+			Player temp = p1;
+			p1=p2;
+			p2 = temp;
 			
 		}
 		
