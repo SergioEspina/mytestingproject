@@ -34,7 +34,7 @@ public class Board {
 		return board;
 		
 	}
-	
+	/*
 	public void print() {
 		for(int i=0; i<=rowSize; i++) {
 			System.out.println();
@@ -54,6 +54,6 @@ public class Board {
 			System.out.println();
 		}
 		
-	}
+	}*/
 		
 }

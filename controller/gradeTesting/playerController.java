@@ -3,23 +3,23 @@ package gradeTesting;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Game {
+public class playerController {
 
 	private ArrayList<Player> players;
 	private int boardRows;
 	private int boardCols;
 	private boolean over;
+	private static mainView view;
 	
-	public Game(int boardRows, int boardCols) {
+	private boolean isOver() {return over;}
+	
+	public playerController(int boardRows, int boardCols) {
 		players = new ArrayList<Player>();
 		this.boardRows = boardRows;
 		this.boardCols = boardCols;
 		over = false;
+		view = new mainView(this);
 	}
-	
-	
-	 
-	private boolean isOver() {return over;}
 	
 	public void createPlayer() {
 		Board b = new Board(boardRows, boardCols);
@@ -28,12 +28,12 @@ public class Game {
 		
 		Scanner in = new Scanner(System.in);
 		
-		System.out.println("number of ships: ");
 		try {
 			/*
 			 * read and create number of ships
 			 */
-			int nShips = Integer.parseInt(in.nextLine());
+			//int nShips = Integer.parseInt(in.nextLine());
+			int nShips = 10;
 						
 			for(int i=0; i<nShips; i++) {
 				
@@ -69,56 +69,14 @@ public class Game {
 		
 	
 	}
-
+	
+	public static void main(String[] args) {
 		
-
+		playerController controller = new playerController(10,10);
 		
-	public void play() {
-		int turn = 0;
-		Scanner in = new Scanner(System.in);
-		Player p1 = players.get(0);
-		Player p2 = players.get(1);
-		
-		while(!isOver() && players.size()>1) {
-			
-			try {
-				
-				System.out.println("coordinate to attack (coordinate comma separated x,y): ");
-				System.out.println();
-				
-				String[] xy = in.nextLine().split(",");
-				Coordinate attack = new Coordinate(Integer.parseInt(xy[0]), Integer.parseInt(xy[1]));
-				boolean success = p2.attacked(attack);
-				
-				if(success) {
-					p1.setEnemi(attack);
-					System.out.println("You hit a ship in position: " + xy[0] + "," + xy[1] );
-					
-					if(!p2.isAlive()) {
-						players.remove(turn);
-						System.out.println("Player " + p2.getPlayerNumber() + " was eliminated!");
-						over = players.size()<=1;
-					}
-					
-				}
-				
-				
-			}catch(Exception e) {
-				if(e.getMessage().equals("OutR"))
-				e.printStackTrace();
-			}
-			
-			Player temp = p1;
-			p1=p2;
-			p2 = temp;
-			
-		}
-		
-		System.out.println("Player " + players.get(0).getPlayerNumber() + " wins!");
+		view.prepareGame();
 		
 	}
 	
-	
-	
-	
 }
+
