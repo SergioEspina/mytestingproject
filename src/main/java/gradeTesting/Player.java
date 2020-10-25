@@ -11,6 +11,7 @@ public class Player {
 	private Board board;
 	private Board enemiBoard;
 	private int playerNumber;
+	private static int maxWidthShip = 5;
 	
 	public Player(int playerNumber, Board board) {
 		ships = new ArrayList<Ship>();
@@ -26,7 +27,7 @@ public class Player {
 	}
 	
 	
-	
+	//put in controller
 	public void createShips() throws Exception {
 		Scanner in = new Scanner(System.in);
 		
@@ -49,17 +50,21 @@ public class Player {
 	public Board getBoard() {
 		return board;
 	}
+	
 	public void addShip(int width, ArrayList<Coordinate> coord) throws Exception {
-		
+		if(width > maxWidthShip) throw new Exception("Width out of bounds");
 		for(int i = 0; i < coord.size(); i++) {
+			if(board.getBoard()[coord.get(i).getX()][coord.get(i).getY()] != null) {
+				throw new Exception("Coord with an existent ship");
+			}
 			if(!checkCoordsBoards(coord.get(i).getX(), coord.get(i).getY())) throw new Exception("Coords not correct");
 		}
+		
 		
 		Ship boat = new Ship(width, coord);
 		ships.add(boat);
 		remShips.add(boat);
 		//afegir al taulell
-		
 		
 		ArrayList<Coordinate> shipPos = boat.getPositions();
 		
@@ -143,8 +148,6 @@ public class Player {
 		}else if(x > board.getRowSize()){
 			return false;
 		}else if(y > board.getColSize()){
-			return false;
-		}else if(board.getBoard()[x][y] != null) {
 			return false;
 		}
 		

@@ -13,34 +13,61 @@ public class PlayerTest {
 	public void setUp() throws Exception {
 	}
 
-	//@Test
-	public void test() throws Exception {
+	@Test //Test for the coords with enemy atacked you, the coord was tested before if was valid or not
+	public void testAddShip() throws Exception {
 		Board b = new Board(12, 12);
 		Player p = new Player(0, b);
 		
-		//create ship
+		//Create a ship
+		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
+		positions.add(new Coordinate(5,5));
+		positions.add(new Coordinate(5,6));
+		//put a ship in the board
+		p.addShip(2, positions);
+		assertNotNull(p.getBoard().getBoard()[5][5]);
+		assertNotNull(p.getBoard().getBoard()[5][6]);
+		assertNull(p.getBoard().getBoard()[2][2]);
 		
-		//readint
+		//position on board with a ship 
+		try {
+			positions = new ArrayList<Coordinate>();
+			positions.add(new Coordinate(5,5));
+			p.addShip(1, positions);
+		}catch (Exception e) {
+			assertEquals(false, false);
+		}
 		
-		//readcoord
+		//negative coords for a ship
+		try {
+			positions = new ArrayList<Coordinate>();
+			positions.add(new Coordinate(-1,5));
+			p.addShip(1, positions);
+		}catch (Exception e) {
+			assertEquals(false, false);
+		}
 		
-		//attack
+		//negative coords for a ship
+		try {
+			positions = new ArrayList<Coordinate>();
+			positions.add(new Coordinate(1,-5));
+			p.addShip(1, positions);
+		}catch (Exception e) {
+			assertEquals(false, false);
+		}
 		
-		
-		//attacked
-		assertEquals(p.attacked(new Coordinate(3,3)),true);
-		assertEquals(p.attacked(new Coordinate(7,7)),false);
-		assertEquals(p.attacked(new Coordinate(3,4)),true);
-		assertEquals(p.attacked(new Coordinate(3,6)),false);
-		assertEquals(p.attacked(new Coordinate(3,3)),true);
-		
-		assertEquals(p.isAlive(),true);
-		
-		assertEquals(p.attacked(new Coordinate(3,5)),true);
-		
-		assertEquals(p.isAlive(),false);
-		//hasShips
-		
+		//max width ship
+		try {
+			positions = new ArrayList<Coordinate>();
+			positions.add(new Coordinate(1,1));
+			positions.add(new Coordinate(1,2));
+			positions.add(new Coordinate(1,3));
+			positions.add(new Coordinate(1,4));
+			positions.add(new Coordinate(1,5));
+			positions.add(new Coordinate(1,6));
+			p.addShip(6, positions);
+		}catch (Exception e) {
+			assertEquals(false, false);
+		}
 		
 	}
 	
@@ -56,6 +83,11 @@ public class PlayerTest {
 		//put a ship in the board
 		p.addShip(2, positions);
 		
+		try {
+			p.attacked(new Coordinate(-5,5));
+		}catch (Exception e) {
+			assertEquals(false, false);
+		}
 		
 		assertEquals(p.attacked(new Coordinate(3,3)),false);
 		assertEquals(p.attacked(new Coordinate(7,7)),false);
@@ -70,39 +102,6 @@ public class PlayerTest {
 		
 	}
 	
-	@Test
-	public void checkBoard() throws Exception {
-		Board b = new Board(12, 12);
-		Player p = new Player(0, b);
-		
-		//Create a ship
-		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
-		positions.add(new Coordinate(5,5));
-		positions.add(new Coordinate(5,6));
-		//put a ship in the board
-		p.addShip(2, positions);
-		p.attacked(new Coordinate(5,5));
-		p.getBoard().print();
-		
-		boolean equals = true;
-		for(int i=0; i<12; i++) {
-			for(int j=0; j<12; j++) {
-				Ship shipXY = p.getBoard().getBoard()[i][j];
-				if(((i == 5 && j == 5) || (i == 5 && j == 6) )) {
-					if(shipXY == null)
-						equals = false;
-					
-				}else {
-					equals = shipXY == null;
-				}
-				if(!equals) break;
-			}
-			if(!equals) break;
-		}
-		
-		assertEquals(equals,true);
-		
-	}
 	
 	@Test //Test for the coords insert by player to make a ship in the board, white box??
 	public void testCheckCoordsBoards() throws Exception {
@@ -120,10 +119,10 @@ public class PlayerTest {
 		
 		
 		assertEquals(p.checkCoordsBoards(-1, -1), false);//Negative case, out of board fronter
+		assertEquals(p.checkCoordsBoards(-1, 1), false);//Negative case, out of board fronter
+		assertEquals(p.checkCoordsBoards(1, -1), false);//Negative case, out of board fronter
 		assertEquals(p.checkCoordsBoards(12, 2), false);//Negative case, out of board fronter row
 		assertEquals(p.checkCoordsBoards(2, 12), false);//Negative case, out of board fronter col
-		assertEquals(p.checkCoordsBoards(5, 6), false);//Negative case, one boat in this position
-		assertEquals(p.checkCoordsBoards(2, 2), true);//Positive case, nice position to put a float
 		
 	}
 
