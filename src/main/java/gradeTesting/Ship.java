@@ -16,7 +16,7 @@ public class Ship {
 	private ArrayList<Coordinate> remainingParts;
 	
 	public Ship() {
-		
+		width = 1;
 	}
 
 	public Ship(int width, ArrayList<Coordinate> positions) throws Exception {
@@ -25,12 +25,12 @@ public class Ship {
 			throw new Exception("Ship is not well formed");
 		 
 		this.positions = positions;
+		this.width = width;
 		
 		o = checkOrientation(positions);
-		if(o==null)
+		if(o==null && width > 1)
 			throw new Exception("Ship doesn't follow the orientation pattern");
-		this.width = width;
-		this.positions = positions;
+		
 		remainingParts = (ArrayList<Coordinate>) positions.clone();
 		
 		
@@ -46,8 +46,8 @@ public class Ship {
 			return Orientation.VERTICAL;
 		}else if(isHorizontal()) {
 			return Orientation.HORIZONTAL;
-		}else if(isDiagonal()) {
-			return Orientation.DIAGONAL;
+		/*}else if(isDiagonal()) {
+			return Orientation.DIAGONAL;*/
 		}else
 			return null;
 	}
@@ -60,6 +60,8 @@ public class Ship {
 		int lastX = positions.get(0).getX();
 		int lastY = positions.get(0).getY();
 		boolean isVertical = true;
+		
+		if(width == 1) return false;
 		
 		for (int i = 1; i<width; i++) {
 
@@ -83,6 +85,8 @@ public class Ship {
 		int lastY = positions.get(0).getY();
 		boolean isHorizontal = true;
 		
+		if(width == 1) return false;
+		
 		for (int i = 1; i<width; i++) {
 
 			int currX = positions.get(i).getX();
@@ -100,10 +104,12 @@ public class Ship {
 		return isHorizontal;
 	}
 	
-	private boolean isDiagonal() {
+	/*private boolean isDiagonal() {
 		int lastX = positions.get(0).getX();
 		int lastY = positions.get(0).getY();
 		boolean isDiagonal = true;
+		
+		if(width == 1) return false;
 		
 		for (int i = 1; i<width; i++) {
 
@@ -120,7 +126,7 @@ public class Ship {
 		}
 		
 		return isDiagonal;
-	}
+	}*/
 	
 	public boolean touch(Coordinate c) {
 		boolean touched = false;
@@ -147,12 +153,25 @@ public class Ship {
 		return remainingParts.size() > 0;
 	}
 	
-	public boolean isTouched() {
+	/*public boolean isTouched() {
 		return remainingParts.size() != width;
 	}
+	*/
 	
 	public boolean isTouched(Coordinate c) {
 		boolean result = true;
+		boolean contain = false;
+		
+		
+		for(Coordinate co : positions) {
+			if(co.getX() == c.getX() && co.getY() == c.getY()) {
+				contain = true;
+				break;
+			}
+		}
+		
+		if(!contain) return false;
+		
 		for(Coordinate co : remainingParts) {
 			if(co.getX() == c.getX() && co.getY() == c.getY()) {
 				result = false;

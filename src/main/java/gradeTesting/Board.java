@@ -2,8 +2,8 @@ package gradeTesting;
 
 public class Board {
 	
-	private int rowSize;
-	private int colSize;
+	public static int rowSize;
+	public static int colSize;
 	private Ship[][] board;
 			
 	public Board(int x, int y) {
@@ -26,16 +26,8 @@ public class Board {
 		return rowSize;
 	}
 	
-	public void setRowSize(int rowSize) {
-		this.rowSize = rowSize;
-	}
-	
 	public int getColSize() {
 		return colSize;
-	}
-	
-	public void setColSize(int colSize) {
-		this.colSize = colSize;
 	}
 	
 	public Ship[][] getBoard(){
