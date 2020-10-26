@@ -136,7 +136,7 @@ public class playerController {
 	}
 	
 	public void printBoard(Player p) {
-		view.printBoard(p.getBoard());
+		view.printBoard(p.getBoard()); 
 	}
 	
 	public void printEnemiBoard(Player p) {
