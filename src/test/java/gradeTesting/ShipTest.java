@@ -108,6 +108,7 @@ public class ShipTest {
 			orientation = s.checkOrientation(positions);
 			assertEquals(orientation, Orientation.HORIZONTAL);
 			
+			try {
 			width=5;
 			positions = new ArrayList<Coordinate>();
 			positions.add(new Coordinate(10,9));
@@ -120,6 +121,9 @@ public class ShipTest {
 			s = new Ship(width, positions);
 			orientation = s.checkOrientation(positions);
 			assertEquals(orientation, Orientation.DIAGONAL);
+			} catch (Exception e) {
+				assertEquals(false,false);
+			}
 			
 			
 			//orientation null

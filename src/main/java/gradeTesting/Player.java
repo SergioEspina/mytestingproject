@@ -28,7 +28,7 @@ public class Player {
 	
 	
 	//put in controller
-	public void createShips() throws Exception {
+	/*public void createShips() throws Exception {
 		Scanner in = new Scanner(System.in);
 		
 		int n = readInt(in, "enter number of ships: ", "number of ships must be an integer and greater than 0");
@@ -45,10 +45,14 @@ public class Player {
 		in.close();
 		
 
-	}
+	}*/
 	
 	public Board getBoard() {
 		return board;
+	}
+	
+	public Board getEnemiBoard() {
+		return enemiBoard;
 	}
 	
 	public void addShip(int width, ArrayList<Coordinate> coord) throws Exception {
@@ -73,14 +77,14 @@ public class Player {
 		}
 	}
 	
-	public Coordinate play() {
+	/*public Coordinate play() {
 		Scanner in = new Scanner(System.in);
 		Coordinate c  = readCoord(in);
 		in.close();
 		return c;
-	}
+	}*/
 	
-	private int readInt(Scanner in, String message, String errorMsg) {		
+	/*private int readInt(Scanner in, String message, String errorMsg) {		
 		int n = 0;
 		while(n<=0) {
 			System.out.println(message);
@@ -96,9 +100,9 @@ public class Player {
 		
 		
 		return n;
-	}
+	}*/
 	
-	private Coordinate readCoord(Scanner in) {
+	/*private Coordinate readCoord(Scanner in) {
 		String c = in.nextLine();
 		Coordinate coord = null;
 		
@@ -111,7 +115,7 @@ public class Player {
 		coord = new Coordinate(Integer.parseInt(coordStr[0]), Integer.parseInt(coordStr[1]));
 		
 		return coord;
-	}
+	}*/
 	
 	public boolean attacked(Coordinate c) throws Exception {
 		
