@@ -15,7 +15,11 @@ public class GameTest {
 	public void test() {
 		Game g = new Game(12,12);
 		g.createPlayer();
-		int x= 0;
+		
+		
+		g.play();
+		
+		int x = 0;
 	}
 
 }

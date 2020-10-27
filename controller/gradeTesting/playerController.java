@@ -10,15 +10,17 @@ public class playerController {
 	private int boardCols;
 	private boolean over;
 	private static mainView view;
+	private ScannerInput in;
 	
 	private boolean isOver() {return over;}
 	
-	public playerController(int boardRows, int boardCols) {
+	public playerController(int boardRows, int boardCols, ScannerInput in) {
 		players = new ArrayList<Player>();
 		this.boardRows = boardRows;
 		this.boardCols = boardCols;
 		over = false;
 		view = new mainView(this);
+		this.in = in;
 	}
 	
 	public void createPlayer() {
@@ -26,7 +28,7 @@ public class playerController {
 
 		Player p = new Player(players.size()+1, b);
 		
-		Scanner in = new Scanner(System.in);
+		
 		
 		try {
 			/*
@@ -187,7 +189,9 @@ public class playerController {
 	
 	public static void main(String[] args) {
 		
-		playerController controller = new playerController(10,10);
+		ScannerInput in = new ScannerConsole(System.in);
+		
+		playerController controller = new playerController(10,10, in);
 		controller.view.prepareGame();
 			
 		controller.play();
