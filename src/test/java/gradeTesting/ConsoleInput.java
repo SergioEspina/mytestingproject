@@ -11,8 +11,7 @@ public class ConsoleInput implements ScannerInput{
 	ArrayList<String> p1Ships;
 	ArrayList<String> p2Ships;
 	
-	ArrayList<String> p1Attack;
-	ArrayList<String> p2Attack;
+	ArrayList<String> pAttack;
 	
 	private int lastInputProvided;
 	private int providedInputs;
@@ -23,8 +22,7 @@ public class ConsoleInput implements ScannerInput{
 		
 		p1Ships = new ArrayList<String>();
 		p2Ships = new ArrayList<String>();
-		p1Attack = new ArrayList<String>();
-		p2Attack = new ArrayList<String>();
+		pAttack = new ArrayList<String>();
 		
 		
 		//ships for player 1
@@ -45,65 +43,69 @@ public class ConsoleInput implements ScannerInput{
 		 */
 		
 		//player1 attacks which will fail
-		p1Attack.add("3");
-		p1Attack.add("4,5");
-		p1Attack.add("3");
-		p1Attack.add("-4,5");
-		p1Attack.add("3");
-		p1Attack.add("23,12");
+		pAttack.add("3");
+		pAttack.add("4,5");
+		
+		
+		pAttack.add("3");
+		pAttack.add("-4,5");
+		
+		
+		pAttack.add("3");
+		pAttack.add("23,12");
 		
 		//player1 attacks which will touch a ship
-		p1Attack.add("3");
-		p1Attack.add("1,2");
-		p1Attack.add("3");
-		p1Attack.add("1,3");
-		p1Attack.add("3");
-		p1Attack.add("1,4");
+		pAttack.add("3");
+		pAttack.add("1,2");
+		pAttack.add("3");
+		pAttack.add("1,3");
+		pAttack.add("3");
+		pAttack.add("1,4");
 		
-		p1Attack.add("3");
-		p1Attack.add("2,2");
-		p1Attack.add("3");
-		p1Attack.add("2,3");
-		p1Attack.add("3");
-		p1Attack.add("2,4");
+		pAttack.add("3");
+		pAttack.add("2,2");
+		pAttack.add("3");
+		pAttack.add("2,3");
+		pAttack.add("3");
+		pAttack.add("2,4");
 		
-		p1Attack.add("3");
-		p1Attack.add("3,1");
-		p1Attack.add("3");
-		p1Attack.add("3,2");
-		p1Attack.add("3");
-		p1Attack.add("3,3");
+		pAttack.add("3");
+		pAttack.add("3,1");
+		pAttack.add("3");
+		pAttack.add("3,2");
+		pAttack.add("3");
+		pAttack.add("3,3");
 		
 		
 		//player2 attacks which will fail
-		p1Attack.add("3");
-		p1Attack.add("4,5");
-		p1Attack.add("3");
-		p1Attack.add("-4,5");
-		p1Attack.add("3");
-		p1Attack.add("23,12");
+		pAttack.add("3");
+		pAttack.add("4,5");
+		pAttack.add("3");
+		pAttack.add("-4,5");
+		pAttack.add("3");
+		pAttack.add("23,12");
 		
 		//player2 attacks which will touch a ship
-		p1Attack.add("3");
-		p1Attack.add("1,2");
-		p1Attack.add("3");
-		p1Attack.add("1,3");
-		p1Attack.add("3");
-		p1Attack.add("1,4");
+		pAttack.add("3");
+		pAttack.add("1,2");
+		pAttack.add("3");
+		pAttack.add("1,3");
+		pAttack.add("3");
+		pAttack.add("1,4");
 		
-		p1Attack.add("3");
-		p1Attack.add("2,2");
-		p1Attack.add("3");
-		p1Attack.add("2,3");
-		p1Attack.add("3");
-		p1Attack.add("2,4");
+		pAttack.add("3");
+		pAttack.add("2,2");
+		pAttack.add("3");
+		pAttack.add("2,3");
+		pAttack.add("3");
+		pAttack.add("2,4");
 		
-		p1Attack.add("3");
-		p1Attack.add("3,1");
-		p1Attack.add("3");
-		p1Attack.add("3,2");
-		p1Attack.add("3");
-		p1Attack.add("3,3");
+		pAttack.add("3");
+		pAttack.add("3,1");
+		pAttack.add("3");
+		pAttack.add("3,2");
+		pAttack.add("3");
+		pAttack.add("3,3");
 		
 		
 		//add all lists to a list of inputs
@@ -112,8 +114,7 @@ public class ConsoleInput implements ScannerInput{
 		
 		listOfInputs.add(p1Ships);
 		listOfInputs.add(p2Ships);
-		listOfInputs.add(p1Attack);
-		listOfInputs.add(p2Attack);
+		listOfInputs.add(pAttack);
 		
 	}
 	@Override

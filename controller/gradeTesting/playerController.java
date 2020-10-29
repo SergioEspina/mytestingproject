@@ -11,16 +11,22 @@ public class playerController {
 	private boolean over;
 	private static mainView view;
 	private ScannerInput in;
+	private int nShips;
+	private CustomOutput output;
 	
 	private boolean isOver() {return over;}
 	
-	public playerController(int boardRows, int boardCols, ScannerInput in) {
+	public playerController(int boardRows, int boardCols, ScannerInput in, CustomOutput output) {
 		players = new ArrayList<Player>();
 		this.boardRows = boardRows;
 		this.boardCols = boardCols;
 		over = false;
 		view = new mainView(this);
 		this.in = in;
+		nShips = 3;
+		
+		this.output = output;
+		
 	}
 	
 	public void createPlayer() {
@@ -35,7 +41,7 @@ public class playerController {
 			 * read and create number of ships
 			 */
 			//int nShips = Integer.parseInt(in.nextLine());
-			int nShips = 1;
+
 			boolean insert;
 						
 			for(int i=0; i<nShips; i++) {
@@ -46,7 +52,7 @@ public class playerController {
 					ArrayList<Coordinate> shipCoords = new ArrayList<Coordinate>();
 					int x = 0;
 					int y = 0;
-					System.out.println("Ship " + i + " coordinates x, y should be separated by coma and a space between different entries(x,y w,z ....)");
+					output.println("Ship " + i + " coordinates x, y should be separated by coma and a space between different entries(x,y w,z ....)");
 					String text = in.nextLine();
 					/*
 					 * read and create coordinates for each ship
@@ -76,7 +82,7 @@ public class playerController {
 			e.printStackTrace();
 		}
 		
-		System.out.println();
+		output.println();
 	
 	}
 	
@@ -151,8 +157,8 @@ public class playerController {
 		
 		try {
 			
-			System.out.println("coordinate to attack (coordinate comma separated x,y): ");
-			System.out.println();
+			output.println("coordinate to attack (coordinate comma separated x,y): ");
+			output.println();
 			
 			String[] xy = in.nextLine().split(",");
 			Coordinate attack = new Coordinate(Integer.parseInt(xy[0]), Integer.parseInt(xy[1]));
@@ -190,8 +196,9 @@ public class playerController {
 	public static void main(String[] args) {
 		
 		ScannerInput in = new ScannerConsole(System.in);
+		ConsoleOutput co = new ConsoleOutput();
 		
-		playerController controller = new playerController(10,10, in);
+		playerController controller = new playerController(10,10, in, co);
 		controller.view.prepareGame();
 			
 		controller.play();
