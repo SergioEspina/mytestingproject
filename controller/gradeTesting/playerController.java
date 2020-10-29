@@ -13,6 +13,8 @@ public class playerController {
 	private ScannerInput in;
 	private int nShips;
 	private CustomOutput output;
+	private static final int MAX_FAILED_ATTEMPT = 3;
+	private static final int MAX_FAILED_TURNS = 3;
 	
 	private boolean isOver() {return over;}
 	
@@ -43,9 +45,11 @@ public class playerController {
 			//int nShips = Integer.parseInt(in.nextLine());
 
 			boolean insert;
-						
+			int failedCords;
+			
 			for(int i=0; i<nShips; i++) {
 				insert = false;
+				failedCords = 0;
 				
 				while(!insert) {
 					
@@ -69,10 +73,16 @@ public class playerController {
 						p.addShip(shipCoords.size(), shipCoords);
 						insert = true;
 					}catch(Exception e) {
-						e.printStackTrace();
+						
+						if (failedCords >= MAX_FAILED_ATTEMPT) { 
+							output.println("You exceded the maximun number of attempts.");
+							System.exit(0);
+						}
+						output.println("Coordinates not valid, try again you have " + (MAX_FAILED_ATTEMPT - failedCords) + " more attempts");
+						failedCords += 1;
+						
 					}
 				}
-				
 			}
 			
 			//add player to list of players
@@ -154,36 +164,51 @@ public class playerController {
 	public boolean attack(Player p1, Player p2) {
 		
 		Scanner in = new Scanner(System.in);
+		int failedCords = 0;
 		
-		try {
+		while(failedCords < MAX_FAILED_ATTEMPT) {
 			
-			output.println("coordinate to attack (coordinate comma separated x,y): ");
-			output.println();
-			
-			String[] xy = in.nextLine().split(",");
-			Coordinate attack = new Coordinate(Integer.parseInt(xy[0]), Integer.parseInt(xy[1]));
-			boolean success = p2.attacked(attack);
-			
-			if(success) {
-				p1.setEnemi(attack);
-				view.hitBoat(xy[0], xy[1]);
+			try {
 				
-				if(!p2.isAlive()) {
-					players.remove(1);
-					view.playerEliminated(p2);
-					over = players.size()<=1;
+				output.println("coordinate to attack (coordinate comma separated x,y): ");
+				output.println();
+				
+				String[] xy = in.nextLine().split(",");
+				Coordinate attack = new Coordinate(Integer.parseInt(xy[0]), Integer.parseInt(xy[1]));
+				boolean success = p2.attacked(attack);
+				
+				if(success) {
+					p1.setEnemi(attack);
+					view.hitBoat(xy[0], xy[1]);
+					
+					if(!p2.isAlive()) {
+						players.remove(1);
+						view.playerEliminated(p2);
+						over = players.size()<=1;
+					}
+					
 				}
 				
+				return true;
+				
+			}catch(Exception e) {
+				
+				if(failedCords >= MAX_FAILED_ATTEMPT) {
+					output.println("Turn lost.");
+					if(p1.getFailedTurns() >= MAX_FAILED_TURNS) {
+						output.println("You exceded the maximun number of attempts");
+					}
+					p1.setFailedTurns(p1.getFailedTurns() + 1);
+					return false;
+				}
+				output.println("Coordinates not valid, try again you have " + (MAX_FAILED_ATTEMPT - failedCords) + " more attempts.");
+				failedCords += 1;
+							
 			}
 			
-			return true;
-			
-		}catch(Exception e) {
-			if(e.getMessage().equals("OutR"))
-			e.printStackTrace();
-			return false;
 		}
 		
+		return false;
 	}
 	
 	public void surrender(Player p1) {

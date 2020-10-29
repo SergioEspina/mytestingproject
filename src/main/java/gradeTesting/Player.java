@@ -12,6 +12,7 @@ public class Player {
 	private Board enemiBoard;
 	private int playerNumber;
 	private static int maxWidthShip = 5;
+	private int failedTurns;
 	
 	public Player(int playerNumber, Board board) {
 		ships = new ArrayList<Ship>();
@@ -20,6 +21,7 @@ public class Player {
 		this.board = board;
 		this.playerNumber = playerNumber;
 		enemiBoard = new Board(board.getRowSize()+1, board.getColSize()+1);
+		failedTurns = 0;
 	}
 	
 	public int getPlayerNumber() {
@@ -161,6 +163,14 @@ public class Player {
 	public void setEnemi(Coordinate c){
 		if (c != null) enemiBoard.getBoard()[c.getX()][c.getY()] = new Ship();
 		
+	}
+
+	public int getFailedTurns() {
+		return failedTurns;
+	}
+
+	public void setFailedTurns(int failedTurns) {
+		this.failedTurns = failedTurns;
 	}
 	
 }

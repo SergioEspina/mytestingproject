@@ -18,7 +18,7 @@ public class ConsoleInput implements ScannerInput{
 	
 	public ConsoleInput() {
 		lastInputProvided = 0;
-		providedInputs = 1;
+		providedInputs = 0;
 		
 		p1Ships = new ArrayList<String>();
 		p2Ships = new ArrayList<String>();
@@ -117,6 +117,7 @@ public class ConsoleInput implements ScannerInput{
 		listOfInputs.add(pAttack);
 		
 	}
+	
 	@Override
 	public String nextLine() {
 		
