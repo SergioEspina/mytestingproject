@@ -35,6 +35,7 @@ public class ConsoleInput implements ScannerInput{
 		p2Ships.add("1,2 1,-3 -1,4");
 		p2Ships.add("1,2 1,3 1,4");
 		p2Ships.add("2,2 2,3 2,4");
+		p2Ships.add("2,2 2,3 2,4");
 		p2Ships.add("3,1 3,2 3,3");
 		
 		
@@ -124,7 +125,7 @@ public class ConsoleInput implements ScannerInput{
 		
 		if(providedInputs == listOfInputs.get(lastInputProvided).size()) {
 			lastInputProvided++;
-			providedInputs = 1;
+			providedInputs = 0;
 		}
 			
 		String in = listOfInputs.get(lastInputProvided).get(providedInputs);
