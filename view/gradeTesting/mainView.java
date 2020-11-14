@@ -8,7 +8,7 @@ public class mainView {
 		this.c = c;
 	}
 	
-	public static void prepareGame() {
+	public static void prepareGame() throws Exception {
 		
 		System.out.println("Starting game, size of board is 10x10"); 
 		System.out.println("You have to create 3 ships. The shape of each must be <=4");
