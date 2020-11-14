@@ -70,8 +70,8 @@ public class playerControllerTest {
 		
 	}
 	
-	@Test
-	public void testPlay() {
+	//@Test
+	public void testFinishedGame() { //prove the game finished nice, just see the 2 last lines of buffer
 		
 		ConsoleInput ci = new ConsoleInput();
 		OutputBuffer ob = new OutputBuffer();
@@ -101,24 +101,54 @@ public class playerControllerTest {
 		
 		buffer = ob.getBuffer();
 		
+		boolean validOutput = buffer.get(buffer.size()-1).contains("1 wins");
 		
-		boolean validOutput = true;
-		
-		String [] correctOutput = {"should be separated", "not valid", "Ship 0", "Ship 1", "Ship 2"};
-		
-		for(int i=0; i < buffer.size(); i++) {
-			
-			if(!buffer.get(i).contains(correctOutput[i])) {
-				validOutput = false;
-				break;
-			}
-			
-		}
+		validOutput = validOutput && buffer.get(buffer.size()-2).contains("2 was eliminated");
 		
 		assertEquals(validOutput, true);
 		
 		ob.reset();
 		
 	}
+	
+	@Test
+	public void turnLost() { //prove turn lost and surrender
+		
+		ConsoleInput ci = new ConsoleInput();
+		ci.prepareTurn();
+		OutputBuffer ob = new OutputBuffer();
+		ArrayList<String> buffer;
+		
+		playerController pc = new playerController(10,10, ci, ob);
+		
+		
+		//create player 1
+		pc.createPlayer();
+		
+		buffer = ob.getBuffer();
+		
+		ob.reset();
+		
 
+		//create player 2
+		pc.createPlayer();
+		
+		buffer = ob.getBuffer();
+				
+		ob.reset();
+		
+		//play the game
+		pc.play();
+		
+		buffer = ob.getBuffer();
+		
+		boolean validOutput = buffer.get(10).contains("Turn lost");
+		
+		validOutput = validOutput && buffer.get(buffer.size()-2).contains("1 was eliminated");
+		
+		assertEquals(validOutput, true);
+		
+		ob.reset();
+		
+	}
 }
