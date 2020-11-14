@@ -35,7 +35,7 @@ public class playerController {
 
 		Player p = new Player(players.size()+1, b);
 		
-		
+		boolean addPlayer = true;
 		
 		try {
 			/*
@@ -64,7 +64,7 @@ public class playerController {
 						String []xy = coordi.split(",");
 						x = Integer.parseInt(xy[0]);
 						y = Integer.parseInt(xy[1]);
-						shipCoords.add(new Coordinate(x,y));
+						shipCoords.add(new Coordinate(x,y)); 
 					}
 					
 					//add ship to player
@@ -73,19 +73,23 @@ public class playerController {
 						insert = true;
 					}catch(Exception e) {
 						
+						failedCords += 1;
 						if (failedCords >= MAX_FAILED_ATTEMPT) { 
 							output.println("You exceded the maximun number of attempts.");
-							System.exit(0);
+							addPlayer = false;
+							break;
 						}
 						output.println("Coordinates not valid, try again you have " + (MAX_FAILED_ATTEMPT - failedCords) + " more attempts");
-						failedCords += 1;
 						
 					}
 				}
 			}
 			
 			//add player to list of players
-			players.add(p);
+			if (addPlayer) {
+				players.add(p);
+			}
+			
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -97,43 +101,54 @@ public class playerController {
 	
 	public void play() {
 		int turn = 0;
-		//Scanner in = new Scanner(System.in);
-		Player p1 = players.get(0);
-		Player p2 = players.get(1);
-		boolean correct = false;
 		
-		while(!isOver() && players.size()>1) {
-			correct = false;
+		if ( players.size() < 2) {
 			
-			while(!correct) {
+			output.println("Numeró de jugadors inferiors a 2");
+			over = true;
+			
+		}else{
+			
+			//Scanner in = new Scanner(System.in);
+			Player p1 = players.get(0);
+			Player p2 = players.get(1);
+			
+			boolean correct = false;
+			
+			while(!isOver() && players.size()>1) {
 				
-				view.printMenu(p1);
+				correct = false;
 				
-				correct = selectAction(p1, p2);
-				
-				if(isOver()) {
-					correct = true;
-					continue;
-				}
-				
-				if(correct) {
+				while(!correct) {
 					
-					Player temp = p1;
-					p1=p2;
-					p2 = temp;
-					correct = true;
+					view.printMenu(p1);
 					
-				}else { //prove if player must be eliminated of the game for failed turns
-					Player temp = p1;
-					p1=p2;
-					p2 = temp;
-					correct = false;					
-				}
+					correct = selectAction(p1, p2);
+					
+					if(isOver()) {
+						correct = true;
+						continue;
+					}
+					
+					if(correct) {
+						
+						Player temp = p1;
+						p1=p2;
+						p2 = temp;
+						correct = true;
+						
+					}else { //prove if player must be eliminated of the game for failed turns
+						Player temp = p1;
+						p1=p2;
+						p2 = temp;
+						correct = false;					
+					}
 
+				}
 			}
-		}
-		 
-		view.playerWinner(players.get(0));
+			 
+			view.playerWinner(players.get(0));
+		}	
 		
 	}
 	

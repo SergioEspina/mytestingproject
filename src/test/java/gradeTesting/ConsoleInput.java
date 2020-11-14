@@ -161,6 +161,34 @@ public class ConsoleInput implements ScannerInput {
 		listOfInputs.add(pAttack);
 	}
 
+	public void prepareFailedCreateShip() {
+		lastInputProvided = 0;
+		providedInputs = 0;
+
+		p1Ships = new ArrayList<String>();
+		p2Ships = new ArrayList<String>();
+		pAttack = new ArrayList<String>();
+
+		// ships for player 1
+		p1Ships.add("1,2 1,3 1,4");
+		p1Ships.add("2,2 2,3 2,4");
+		p1Ships.add("3,1 3,2 3,3");
+
+		// ships for player 2
+		p1Ships.add("1,2 1,3 1,4");
+		p1Ships.add("2,2 2,3 2,4");
+		p1Ships.add("-3,1 3,2 3,3");
+		p1Ships.add("-3,1 3,2 3,3");
+		p1Ships.add("-3,1 3,2 3,3");
+
+		// add all lists to a list of inputs
+		listOfInputs = new ArrayList<ArrayList<String>>();
+
+		listOfInputs.add(p1Ships);
+		listOfInputs.add(p2Ships);
+		listOfInputs.add(pAttack);
+	}
+
 	@Override
 	public String nextLine() {
 
