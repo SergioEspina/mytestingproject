@@ -13,7 +13,7 @@ public class mainView {
 	public static void prepareGame() throws Exception {
 		
 		o.println("Starting game, size of board is 10x10"); 
-		o.println("You have 10 ships");
+		o.println("each player has 3 ships, the size of each must be <= 4");
 		o.println("Player 1 create and put your ships");
 		c.createPlayer();
 		
@@ -25,8 +25,8 @@ public class mainView {
 	public static void printMenu(Player p) {
 		
 		o.println("Player " + p.getPlayerNumber() + " is your turn, choose the action:");
-		o.println("1. See my board");
-		o.println("2. See enemy board");
+		o.println("1. Check my board");
+		o.println("2. Check enemy board");
 		o.println("3. Atack");
 		o.println("4. Surrender");
 			

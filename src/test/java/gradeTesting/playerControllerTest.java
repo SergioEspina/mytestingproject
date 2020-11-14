@@ -95,7 +95,7 @@ public class playerControllerTest {
 
 	@Test
 	public void testFinishedGame() throws Exception { // prove the game finished nice, just see the 2 last lines of
-														// buffer
+														
 
 		ConsoleInput ci = new ConsoleInput();
 		OutputBuffer ob = new OutputBuffer();
