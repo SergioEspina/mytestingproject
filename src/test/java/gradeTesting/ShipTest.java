@@ -6,166 +6,164 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-
 /*
  * In this class we test all methods run correctly
- * We don't considerate negative coordinates
+ * We don't considerate negative coordinates because this is considerate in other file
  */
 public class ShipTest {
 
-	
+	/*
+	 * Equivalent partition: valid and not valid parameters for ship constructor
+	 */
 	@Test
-	public void testConstructor() { //white box
-		int width = 3;
-		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
-		positions.add(new Coordinate(3,3));
-		positions.add(new Coordinate(3,4));
-		positions.add(new Coordinate(3,5));
-		
-		//orientation null
-		ArrayList<Coordinate> positions2 = new ArrayList<Coordinate>();
-		positions2.add(new Coordinate(3,3));
-		positions2.add(new Coordinate(3,4));
-		positions2.add(new Coordinate(4,4));
-		
+	public void testConstructor() {  
 		Ship s;
 		
-		//width != position size
+		try {
+			s = new Ship();
+			assertEquals(true, true);
+		} catch (Exception e) {
+			assertEquals(false, false);
+		}
+		
+		int width = 3;
+		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
+		positions.add(new Coordinate(3, 3));
+		positions.add(new Coordinate(3, 4));
+		positions.add(new Coordinate(3, 5));
+
+		// orientation null
+		ArrayList<Coordinate> positions2 = new ArrayList<Coordinate>();
+		positions2.add(new Coordinate(3, 3));
+		positions2.add(new Coordinate(3, 4));
+		positions2.add(new Coordinate(4, 4));
+
+		// width != position size
 		try {
 			s = new Ship(1, positions);
 			assertEquals(true, false);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			assertEquals(false, false);
 		}
-		
-		//width <= 0 
+
+		// width <= 0
 		try {
 			s = new Ship(0, positions);
 			assertEquals(true, false);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			assertEquals(false, false);
 		}
-		
-		//width < 0 
+
+		// width < 0
 		try {
 			s = new Ship(-2, positions);
 			assertEquals(true, false);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			assertEquals(false, false);
 		}
-		
-		//null
+
+		// null
 		try {
 			s = new Ship(3, null);
 			assertEquals(true, false);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			assertEquals(false, false);
 		}
-	
-		//orientation null
+
+		// orientation null
 		try {
 			s = new Ship(width, positions2);
 			assertEquals(true, false);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			assertEquals(false, false);
 		}
-		
+
+		//valid
 		try {
 			s = new Ship(width, positions);
 			assertEquals(true, true);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			assertEquals(true, false);
 		}
 	}
-	
-	
+
+	/*
+	 * Equivalent partition: valid and not valid parameters for chechOrientation
+	 */
 	@Test
-	public void testCheckOrientation() { //white box
+	public void testCheckOrientation() { 
 		int width = 3;
 		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
-		
-		
+
 		Ship s;
 		try {
-			//horizontal
-			positions.add(new Coordinate(3,3));
-			positions.add(new Coordinate(3,4));
-			positions.add(new Coordinate(3,5));
-			
+			//Vertical
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(3, 4));
+			positions.add(new Coordinate(3, 5));
+
 			s = new Ship(width, positions);
 			Orientation orientation = s.checkOrientation(positions);
 			assertEquals(orientation, Orientation.VERTICAL);
-			
-			width=4;
+
+			//Horitzontal
+			width = 4;
 			positions = new ArrayList<Coordinate>();
-			positions.add(new Coordinate(3,3));
-			positions.add(new Coordinate(4,3));
-			positions.add(new Coordinate(5,3));
-			positions.add(new Coordinate(6,3));
-			
-			
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(4, 3));
+			positions.add(new Coordinate(5, 3));
+			positions.add(new Coordinate(6, 3));
+
 			s = new Ship(width, positions);
 			orientation = s.checkOrientation(positions);
 			assertEquals(orientation, Orientation.HORIZONTAL);
-			
+
+			// orientation null
 			try {
-			width=5;
-			positions = new ArrayList<Coordinate>();
-			positions.add(new Coordinate(10,9));
-			positions.add(new Coordinate(9,8));
-			positions.add(new Coordinate(8,7));
-			positions.add(new Coordinate(7,6));
-			positions.add(new Coordinate(6,5));
-			orientation = s.checkOrientation(positions);
-			
-			s = new Ship(width, positions);
-			orientation = s.checkOrientation(positions);
-			assertEquals(orientation, Orientation.DIAGONAL);
+				ArrayList<Coordinate> positions2 = new ArrayList<Coordinate>();
+				positions2.add(new Coordinate(3, 3));
+				positions2.add(new Coordinate(3, 4));
+				positions2.add(new Coordinate(4, 4));
+	
+				s = new Ship(3, positions2);
+				orientation = s.checkOrientation(positions);
+				assertEquals(orientation, null);
 			} catch (Exception e) {
-				assertEquals(false,false);
+				// TODO Auto-generated catch block
+				assertEquals(true, true);
 			}
-			
-			
-			//orientation null
-			ArrayList<Coordinate> positions2 = new ArrayList<Coordinate>();
-			positions2.add(new Coordinate(3,3));
-			positions2.add(new Coordinate(3,4));
-			positions2.add(new Coordinate(4,4));
-			
-			s = new Ship(3, positions2);
-			orientation = s.checkOrientation(positions);
-			assertEquals(orientation, null);
-			
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 	}
-	
+
+	/*
+	 * Equivalent partition: valid and not valid parameters for orientation vertical
+	 */
 	@Test
 	public void testIsVertical() throws Exception {
 		int width = 3;
 		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
 		Ship s;
-		
+
 		try {
-			positions.add(new Coordinate(3,3));
-			positions.add(new Coordinate(3,4));
-			positions.add(new Coordinate(3,5));
-			
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(3, 4));
+			positions.add(new Coordinate(3, 5));
+
 			s = new Ship(width, positions);
 			Orientation orientation = s.checkOrientation(positions);
 			assertEquals(orientation, Orientation.VERTICAL);
-			
-			//test not vertical
+
+			// test not vertical
 			positions = new ArrayList<Coordinate>();
-			positions.add(new Coordinate(3,3));
-			positions.add(new Coordinate(4,3));
-			positions.add(new Coordinate(5,3));
-			
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(4, 3));
+			positions.add(new Coordinate(5, 3));
+
 			s = new Ship(width, positions);
 			orientation = s.checkOrientation(positions);
 			assertEquals(orientation, Orientation.HORIZONTAL);
@@ -173,12 +171,12 @@ public class ShipTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
-			//width 1
+			// width 1
 			positions = new ArrayList<Coordinate>();
-			positions.add(new Coordinate(3,3));
-			
+			positions.add(new Coordinate(3, 3));
+
 			s = new Ship(1, positions);
 			Orientation orientation = s.checkOrientation(positions);
 			orientation = s.checkOrientation(positions);
@@ -187,46 +185,50 @@ public class ShipTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+		//repeat coord
 		try {
-			//equal coord last new
+			// equal coord last new
 			positions = new ArrayList<Coordinate>();
-			positions.add(new Coordinate(3,3));
-			positions.add(new Coordinate(3,3));
-			positions.add(new Coordinate(4,3));
-			
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(4, 3));
+
 			s = new Ship(width, positions);
 			Orientation orientation = s.checkOrientation(positions);
 			orientation = s.checkOrientation(positions);
 			assertEquals(orientation, null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			assertEquals(true, true);
 		}
-		
+
 	}
-	
+
+	/*
+	 * Equivalent partition: valid and not valid parameters for orientation Horitzontal
+	 */
 	@Test
 	public void testIsHoritzontal() throws Exception {
 		int width = 3;
 		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
 		Ship s;
-		
+
 		try {
-			positions.add(new Coordinate(3,3));
-			positions.add(new Coordinate(3,4));
-			positions.add(new Coordinate(3,5));
-			
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(3, 4));
+			positions.add(new Coordinate(3, 5));
+
 			s = new Ship(width, positions);
 			Orientation orientation = s.checkOrientation(positions);
 			assertEquals(orientation, Orientation.VERTICAL);
-			
-			//test not vertical
+
+			// test not vertical
 			positions = new ArrayList<Coordinate>();
-			positions.add(new Coordinate(3,3));
-			positions.add(new Coordinate(4,3));
-			positions.add(new Coordinate(5,3));
-			
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(4, 3));
+			positions.add(new Coordinate(5, 3));
+
 			s = new Ship(width, positions);
 			orientation = s.checkOrientation(positions);
 			assertEquals(orientation, Orientation.HORIZONTAL);
@@ -234,12 +236,12 @@ public class ShipTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
-			//width 1
+			// width 1
 			positions = new ArrayList<Coordinate>();
-			positions.add(new Coordinate(3,3));
-			
+			positions.add(new Coordinate(3, 3));
+
 			s = new Ship(1, positions);
 			Orientation orientation = s.checkOrientation(positions);
 			orientation = s.checkOrientation(positions);
@@ -248,100 +250,101 @@ public class ShipTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
-			//equal coord last new
+			// equal coord last new
 			positions = new ArrayList<Coordinate>();
-			positions.add(new Coordinate(3,3));
-			positions.add(new Coordinate(3,3));
-			positions.add(new Coordinate(3,4));
-			
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(3, 4));
+
 			s = new Ship(width, positions);
 			Orientation orientation = s.checkOrientation(positions);
 			orientation = s.checkOrientation(positions);
 			assertEquals(orientation, null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			assertEquals(true, true);
 		}
-		
+
 	}
-	
-	//@Test
-	public void testSunk() {
-		
-	}
-	
+
+	/*
+	 * Equivalent partition: valid and not valid 
+	 */
 	@Test
 	public void testTouched() throws Exception {
 		int width = 3;
-		
+
 		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
-		
-		positions.add(new Coordinate(3,3));
-		positions.add(new Coordinate(3,4));
-		positions.add(new Coordinate(3,5));
-		
+
+		positions.add(new Coordinate(3, 3));
+		positions.add(new Coordinate(3, 4));
+		positions.add(new Coordinate(3, 5));
+
 		Ship s = s = new Ship(width, positions);
-		
-		assertEquals(s.touch(new Coordinate(3,7)), false);
-		
-		assertEquals(s.touch(new Coordinate(3,3)), true);
-		
-		assertEquals(s.touch(new Coordinate(3,4)), true);
-		
-		assertEquals(s.touch(new Coordinate(4,3)), false);
-		
-		assertEquals(s.touch(new Coordinate(0,0)), false);
-		
-		assertEquals(s.touch(new Coordinate(13,10)), false);
-		
+
+		assertEquals(s.touch(new Coordinate(3, 7)), false);
+
+		assertEquals(s.touch(new Coordinate(3, 3)), true);
+
+		assertEquals(s.touch(new Coordinate(3, 4)), true);
+
+		assertEquals(s.touch(new Coordinate(4, 3)), false);
+
+		assertEquals(s.touch(new Coordinate(0, 0)), false);
+
+		assertEquals(s.touch(new Coordinate(13, 10)), false);
+
 		assertEquals(s.isAlive(), true);
-		
-		assertEquals(s.touch(new Coordinate(3,5)), true);
-		
+
+		assertEquals(s.touch(new Coordinate(3, 5)), true);
+
 		assertEquals(s.isAlive(), false);
-		
+
 	}
-	
+
+	/*
+	 * Equivalent partition: valid and not valid 
+	 */
 	@Test
 	public void testIsTouched() throws Exception {
 		int width = 3;
-		
+
 		ArrayList<Coordinate> positions = new ArrayList<Coordinate>();
-		
-		positions.add(new Coordinate(3,3));
-		positions.add(new Coordinate(3,4));
-		positions.add(new Coordinate(3,5));
-		
+
+		positions.add(new Coordinate(3, 3));
+		positions.add(new Coordinate(3, 4));
+		positions.add(new Coordinate(3, 5));
+
 		Ship s = new Ship(width, positions);
-		
-		assertEquals(s.isTouched(new Coordinate(3,7)), false);
-		
-		assertEquals(s.isTouched(new Coordinate(7,3)), false);
-		
-		assertEquals(s.isTouched(new Coordinate(4,4)), false);
-		
-		assertEquals(s.isTouched(new Coordinate(3,3)), false);
-		
-		assertEquals(s.touch(new Coordinate(3,3)), true);
-		
-		assertEquals(s.isTouched(new Coordinate(3,3)), true);
-		
+
+		assertEquals(s.isTouched(new Coordinate(3, 7)), false);
+
+		assertEquals(s.isTouched(new Coordinate(7, 3)), false);
+
+		assertEquals(s.isTouched(new Coordinate(4, 4)), false);
+
+		assertEquals(s.isTouched(new Coordinate(3, 3)), false);
+
+		assertEquals(s.touch(new Coordinate(3, 3)), true);
+
+		assertEquals(s.isTouched(new Coordinate(3, 3)), true);
+
 		assertEquals(s.isAlive(), true);
-		
-		assertEquals(s.isTouched(new Coordinate(3,4)), false);
-		
-		assertEquals(s.touch(new Coordinate(3,4)), true);
-		
+
+		assertEquals(s.isTouched(new Coordinate(3, 4)), false);
+
+		assertEquals(s.touch(new Coordinate(3, 4)), true);
+
 		assertEquals(s.isAlive(), true);
-		
-		assertEquals(s.isTouched(new Coordinate(3,5)), false);
-		
-		assertEquals(s.touch(new Coordinate(3,5)), true);
-		
+
+		assertEquals(s.isTouched(new Coordinate(3, 5)), false);
+
+		assertEquals(s.touch(new Coordinate(3, 5)), true);
+
 		assertEquals(s.isAlive(), false);
-		
+
 	}
-	
+
 }

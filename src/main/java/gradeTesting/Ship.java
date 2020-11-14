@@ -52,10 +52,6 @@ public class Ship {
 			return null;
 	}
 	
-	private boolean isInBoundaries() {
-		return false;
-	}
-	
 	private boolean isVertical() {
 		int lastX = positions.get(0).getX();
 		int lastY = positions.get(0).getY();
@@ -128,6 +124,11 @@ public class Ship {
 		return isDiagonal;
 	}*/
 	
+	/*
+	 * 
+	 * Check if the provided coordinate is an untouched part of the ship.
+	 * If the coordinate touches a part of the ship remove it from the remaining active coordinates
+	 */
 	public boolean touch(Coordinate c) {
 		boolean touched = false;
 		int i;
@@ -153,11 +154,9 @@ public class Ship {
 		return remainingParts.size() > 0;
 	}
 	
-	/*public boolean isTouched() {
-		return remainingParts.size() != width;
-	}
-	*/
-	
+	/*
+	 *  check if the coordinate has been touched
+	 */
 	public boolean isTouched(Coordinate c) {
 		boolean result = true;
 		boolean contain = false;
