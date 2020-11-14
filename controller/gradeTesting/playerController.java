@@ -171,11 +171,8 @@ public class playerController {
 				res = attack(p1, p2);
 				break;
 			case 4:
-				//surrender(p1);
-				view.playerEliminated(p1);
-				players.remove(0);
+				surrender(p1);
 				res = true;
-				over = players.size()<=1;
 				break;
 		}
 		
@@ -242,8 +239,8 @@ public class playerController {
 	}
 	
 	public void surrender(Player p1) {
-		players.remove(0);
 		view.playerEliminated(p1);
+		players.remove(0);
 		over = players.size()<=1;
 	}
 	
