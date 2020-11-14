@@ -10,7 +10,7 @@ public class playerControllerTest {
 
 
 	//@Test
-	public void testCreatePlayer() {
+	public void testCreatePlayer() throws Exception {
 		ConsoleInput ci = new ConsoleInput();
 		OutputBuffer ob = new OutputBuffer();
 		ArrayList<String> buffer;
@@ -71,7 +71,7 @@ public class playerControllerTest {
 	}
 	
 	//@Test
-	public void testFinishedGame() { //prove the game finished nice, just see the 2 last lines of buffer
+	public void testFinishedGame() throws Exception { //prove the game finished nice, just see the 2 last lines of buffer
 		
 		ConsoleInput ci = new ConsoleInput();
 		OutputBuffer ob = new OutputBuffer();
@@ -112,7 +112,7 @@ public class playerControllerTest {
 	}
 	
 	@Test
-	public void turnLost() { //prove turn lost and surrender
+	public void turnLost() throws Exception { //prove turn lost and surrender
 		
 		ConsoleInput ci = new ConsoleInput();
 		ci.prepareTurn();

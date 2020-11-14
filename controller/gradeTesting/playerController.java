@@ -23,7 +23,7 @@ public class playerController {
 		this.boardRows = boardRows;
 		this.boardCols = boardCols;
 		over = false;
-		view = new mainView(this);
+		view = new mainView(this, output);
 		this.in = in;
 		nShips = 3;
 		
@@ -31,7 +31,7 @@ public class playerController {
 		
 	}
 	
-	public void createPlayer() {
+	public void createPlayer() throws Exception {
 		Board b = new Board(boardRows, boardCols);
 
 		Player p = new Player(players.size()+1, b);
@@ -98,7 +98,7 @@ public class playerController {
 	
 	public void play() {
 		int turn = 0;
-		Scanner in = new Scanner(System.in);
+		//Scanner in = new Scanner(System.in);
 		Player p1 = players.get(0);
 		Player p2 = players.get(1);
 		boolean correct = false;
@@ -112,6 +112,11 @@ public class playerController {
 				
 				correct = selectAction(p1, p2);
 				
+				if(isOver()) {
+					correct = true;
+					continue;
+				}
+				
 				if(correct) {
 					
 					Player temp = p1;
@@ -119,7 +124,10 @@ public class playerController {
 					p2 = temp;
 					correct = true;
 					
-				}else {
+				}else { //prove if player must be eliminated of the game for failed turns
+					Player temp = p1;
+					p1=p2;
+					p2 = temp;
 					correct = false;					
 				}
 
@@ -132,7 +140,7 @@ public class playerController {
 	
 	public boolean selectAction(Player p1, Player p2) {
 		
-		Scanner in = new Scanner(System.in);
+		//Scanner in = new Scanner(System.in);
 		int action = Integer.parseInt(in.nextLine());
 		boolean res = false;
 		
@@ -140,14 +148,21 @@ public class playerController {
 			case 1:
 				printBoard(p1);
 				res = false;
+				break;
 			case 2:
 				printEnemiBoard(p1);
 				res = false;
+				break;
 			case 3:
 				res = attack(p1, p2);
-			/*case 4:
-				surrender(p1);
-				res = true;*/
+				break;
+			case 4:
+				//surrender(p1);
+				view.playerEliminated(p1);
+				players.remove(0);
+				res = true;
+				over = players.size()<=1;
+				break;
 		}
 		
 		return res;	
@@ -163,7 +178,7 @@ public class playerController {
 	
 	public boolean attack(Player p1, Player p2) {
 		
-		Scanner in = new Scanner(System.in);
+		//Scanner in = new Scanner(System.in);
 		int failedCords = 0;
 		
 		while(failedCords < MAX_FAILED_ATTEMPT) {
@@ -193,6 +208,8 @@ public class playerController {
 				
 			}catch(Exception e) {
 				
+				failedCords += 1;
+				
 				if(failedCords >= MAX_FAILED_ATTEMPT) {
 					output.println("Turn lost.");
 					if(p1.getFailedTurns() >= MAX_FAILED_TURNS) {
@@ -202,7 +219,6 @@ public class playerController {
 					return false;
 				}
 				output.println("Coordinates not valid, try again you have " + (MAX_FAILED_ATTEMPT - failedCords) + " more attempts.");
-				failedCords += 1;
 							
 			}
 			
@@ -218,7 +234,7 @@ public class playerController {
 	}
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		ScannerInput in = new ScannerConsole(System.in);
 		ConsoleOutput co = new ConsoleOutput();
