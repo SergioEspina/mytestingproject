@@ -14,7 +14,7 @@ public class Player {
 	private static int maxWidthShip = 5;
 	private int failedTurns;
 	
-	public Player(int playerNumber, Board board) {
+	public Player(int playerNumber, Board board) throws Exception {
 		ships = new ArrayList<Ship>();
 		remShips = new ArrayList<Ship>();
 		isAlive = true;

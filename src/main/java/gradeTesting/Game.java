@@ -21,7 +21,7 @@ public class Game {
 	 
 	private boolean isOver() {return over;}
 	
-	public void createPlayer() {
+	public void createPlayer() throws Exception {
 		Board b = new Board(boardRows, boardCols);
 
 		Player p = new Player(players.size()+1, b);
