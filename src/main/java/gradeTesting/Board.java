@@ -6,7 +6,9 @@ public class Board {
 	public static int colSize;
 	private Ship[][] board;
 			
-	public Board(int x, int y) {
+	public Board(int x, int y) throws Exception {
+		if(x < 1 || y < 1)
+			throw new Exception("x and y axis must be > 1");
 		board = new Ship[x][y];
 		colSize = y-1;
 		rowSize = x-1;

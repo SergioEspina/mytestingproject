@@ -12,7 +12,7 @@ public class GameTest {
 	}
 
 	@Test
-	public void test() {
+	public void test() throws Exception {
 		Game g = new Game(12,12);
 		g.createPlayer();
 		
