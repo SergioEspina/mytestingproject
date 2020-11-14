@@ -11,11 +11,11 @@ public class mainView {
 	public static void prepareGame() {
 		
 		System.out.println("Starting game, size of board is 10x10"); 
-		System.out.println("You have 10 ships");
-		System.out.println("Player 1 create and put your ships");
+		System.out.println("You have to create 3 ships. The shape of each must be <=4");
+		System.out.println("Player 1 create your ships");
 		c.createPlayer();
 		
-		System.out.println("Player 2 create and put your ships");
+		System.out.println("Player 2 create ships");
 		c.createPlayer();
 		
 	}
@@ -23,8 +23,8 @@ public class mainView {
 	public static void printMenu(Player p) {
 		
 		System.out.println("Player " + p.getPlayerNumber() + " is your turn, choose the action:");
-		System.out.println("1. See my board");
-		System.out.println("2. See enemy board");
+		System.out.println("1. Check my board");
+		System.out.println("2. Check enemy board");
 		System.out.println("3. Atack");
 		System.out.println("4. Surrender");
 			
