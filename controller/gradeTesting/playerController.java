@@ -26,7 +26,6 @@ public class playerController {
 		view = new mainView(this, output);
 		this.in = in;
 		nShips = 3;
-		
 		this.output = output;
 		
 	}
