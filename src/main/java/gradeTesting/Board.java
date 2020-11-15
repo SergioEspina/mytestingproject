@@ -9,6 +9,8 @@ public class Board {
 	public Board(int x, int y) throws Exception {
 		if(x < 1 || y < 1)
 			throw new Exception("x and y axis must be > 1");
+		if(x != y)
+			throw new Exception("Board must be equial x and y");
 		board = new Ship[x][y];
 		colSize = y-1;
 		rowSize = x-1;

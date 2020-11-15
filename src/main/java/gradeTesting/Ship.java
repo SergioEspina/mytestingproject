@@ -21,7 +21,7 @@ public class Ship {
 
 	public Ship(int width, ArrayList<Coordinate> positions) throws Exception {
 		
-		if(width <= 0 || positions == null || width != positions.size() )
+		if(width <= 0 || width > 4|| positions == null || width != positions.size() )
 			throw new Exception("Ship is not well formed");
 		 
 		this.positions = positions;

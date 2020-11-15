@@ -11,7 +11,7 @@ public class Player {
 	private Board board;
 	private Board enemiBoard;
 	private int playerNumber;
-	private static int maxWidthShip = 5;
+	private static int maxWidthShip = 4;
 	private int failedTurns;
 	
 	public Player(int playerNumber, Board board) throws Exception {
@@ -58,12 +58,14 @@ public class Player {
 	}
 	
 	public void addShip(int width, ArrayList<Coordinate> coord) throws Exception {
-		if(width > maxWidthShip) throw new Exception("Width out of bounds");
+		
+		if(width > maxWidthShip || width < 1) throw new Exception("Width out of bounds");
 		for(int i = 0; i < coord.size(); i++) {
+			if(!checkCoordsBoards(coord.get(i).getX(), coord.get(i).getY())) throw new Exception("Coords not correct");
+			
 			if(board.getBoard()[coord.get(i).getX()][coord.get(i).getY()] != null) {
 				throw new Exception("Coord with an existent ship");
 			}
-			if(!checkCoordsBoards(coord.get(i).getX(), coord.get(i).getY())) throw new Exception("Coords not correct");
 		}
 		
 		
@@ -122,7 +124,7 @@ public class Player {
 	public boolean attacked(Coordinate c) throws Exception {
 		
 		if(!checkCoordsBoards(c.getX(), c.getY())) {
-			throw new Exception("OutR");
+			throw new Exception("coordenada no valida o fora del rang");
 		}
 		
 		boolean touched = false;

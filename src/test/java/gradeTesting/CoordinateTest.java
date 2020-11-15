@@ -6,9 +6,5 @@ import org.junit.Test;
 
 public class CoordinateTest {
 
-	@Test
-	public void testCheckCoords() {
-		
-	}
 
 }

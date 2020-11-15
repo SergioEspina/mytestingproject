@@ -33,20 +33,20 @@ public class BoardTest {
 			assertEquals(true,true);
 		}
 		
-		
-		// equivalent partition valid board size
+		// not equivalent partition valid board size
 		try {
-			Board b = new Board(5, 5);
+			Board b = new Board(6, 5);
 			assertEquals(false,true);
 		}catch(Exception e) {
 			assertEquals(true,true);
 		}
 		
+		// equivalent partition valid board size
 		try {
 			Board b = new Board(2, 2);
-			assertEquals(false,true);
-		}catch(Exception e) {
 			assertEquals(true,true);
+		}catch(Exception e) {
+			assertEquals(false,false);
 		}
 		
 		
