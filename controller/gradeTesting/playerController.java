@@ -137,7 +137,7 @@ public class playerController {
 						p2 = temp;
 						passTurn = true;
 						
-					}else { //prove if player must be eliminated of the game for failed turns
+					}else { 
 						
 						passTurn = false;					
 					}
