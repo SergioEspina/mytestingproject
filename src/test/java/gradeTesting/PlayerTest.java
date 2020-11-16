@@ -106,7 +106,7 @@ public class PlayerTest {
 	 * Test for the coords with enemy atacked you, the coord was tested before if
 	 * was valid or not
 	 */
-	//@Test
+	@Test
 	public void attacked() throws Exception {
 		Board b = new Board(12, 12);
 		Player p = new Player(0, b);
@@ -155,7 +155,7 @@ public class PlayerTest {
 	/*
 	 * Test for the coords insert by player to make a ship in the board, white box??
 	 */
-	//@Test 
+	@Test 
 	public void testCheckCoordsBoards() throws Exception {
 		Board b = new Board(12, 12);
 		Player p = new Player(0, b);

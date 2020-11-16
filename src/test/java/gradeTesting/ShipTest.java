@@ -13,8 +13,8 @@ import org.junit.Test;
 public class ShipTest {
 
 	/*
-	 * Equivalent partition: valid and not valid parameters for ship constructor
-	 * White and Black box
+	 * White and Black box Equivalent partition: valid and not valid parameters for
+	 * ship constructor Decision coverage, condition coverage
 	 */
 	@Test
 	public void testConstructor() {
@@ -55,7 +55,7 @@ public class ShipTest {
 		positions6.add(new Coordinate(3, 3));
 		positions6.add(new Coordinate(3, 3));
 		positions6.add(new Coordinate(3, 4));
-		
+
 		// max size of position
 		ArrayList<Coordinate> positions3 = new ArrayList<Coordinate>();
 		positions3.add(new Coordinate(4, 3));
@@ -169,8 +169,8 @@ public class ShipTest {
 	}
 
 	/*
-	 * Equivalent partition: valid and not valid parameters for chechOrientation
-	 * Black box
+	 * Black and white box Equivalent partition: valid and not valid parameters for
+	 * chechOrientation Loop Testing for checkHoritzontal and checkVertical
 	 */
 	@Test
 	public void testCheckOrientation() {
@@ -179,16 +179,72 @@ public class ShipTest {
 
 		Ship s;
 		try {
-			// Vertical
+
+			// Horitzontal and vertical avoid loop
+			try {
+				ArrayList<Coordinate> positions2 = new ArrayList<Coordinate>();
+				positions2.add(new Coordinate(3, 3));
+
+				s = new Ship(1, positions2);
+				Orientation orientation = s.checkOrientation(positions2);
+				assertEquals(orientation, null);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				assertEquals(true, true);
+			}
+
+			// Vertical 1 iteration
+			positions = new ArrayList<Coordinate>();
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(3, 4));
+
+			s = new Ship(2, positions);
+			Orientation orientation = s.checkOrientation(positions);
+			assertEquals(orientation, Orientation.VERTICAL);
+
+			// Vertical 2 iteration
+			positions = new ArrayList<Coordinate>();
 			positions.add(new Coordinate(3, 3));
 			positions.add(new Coordinate(3, 4));
 			positions.add(new Coordinate(3, 5));
 
-			s = new Ship(width, positions);
-			Orientation orientation = s.checkOrientation(positions);
+			s = new Ship(3, positions);
+			orientation = s.checkOrientation(positions);
 			assertEquals(orientation, Orientation.VERTICAL);
 
-			// Horitzontal
+			// Vertical 3 iteration
+			positions = new ArrayList<Coordinate>();
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(3, 4));
+			positions.add(new Coordinate(3, 5));
+			positions.add(new Coordinate(3, 6));
+
+			s = new Ship(4, positions);
+			orientation = s.checkOrientation(positions);
+			assertEquals(orientation, Orientation.VERTICAL);
+
+			// Horitzontal 1 iteration
+			width = 2;
+			positions = new ArrayList<Coordinate>();
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(4, 3));
+
+			s = new Ship(width, positions);
+			orientation = s.checkOrientation(positions);
+			assertEquals(orientation, Orientation.HORIZONTAL);
+
+			// Horitzontal 2 iteration
+			width = 3;
+			positions = new ArrayList<Coordinate>();
+			positions.add(new Coordinate(3, 3));
+			positions.add(new Coordinate(4, 3));
+			positions.add(new Coordinate(5, 3));
+
+			s = new Ship(width, positions);
+			orientation = s.checkOrientation(positions);
+			assertEquals(orientation, Orientation.HORIZONTAL);
+
+			// Horitzontal 3 iteration
 			width = 4;
 			positions = new ArrayList<Coordinate>();
 			positions.add(new Coordinate(3, 3));
@@ -238,8 +294,8 @@ public class ShipTest {
 	}
 
 	/*
-	 * Equivalent partition: valid and not valid parameters for orientation vertical
-	 * Black box
+	 * Black and white box Equivalent partition: valid and not valid parameters for
+	 * orientation vertical
 	 */
 	@Test
 	public void testIsVertical() throws Exception {

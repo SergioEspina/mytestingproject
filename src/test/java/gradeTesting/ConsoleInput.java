@@ -42,7 +42,7 @@ public class ConsoleInput implements ScannerInput {
 		 * be chosen (1 - print board, 2 - print enemy board, 3- attack)
 		 */
 
-		// player1 attacks which will fail
+		// player1 attacks 
 		pAttack.add("3");
 		pAttack.add("1,2");
 
@@ -50,7 +50,7 @@ public class ConsoleInput implements ScannerInput {
 		pAttack.add("3");
 		pAttack.add("4,4");
 
-		// player1 attacks which will fail
+		// player1 attacks 
 		pAttack.add("3");
 		pAttack.add("1,3");
 
@@ -58,7 +58,7 @@ public class ConsoleInput implements ScannerInput {
 		pAttack.add("3");
 		pAttack.add("4,4");
 
-		// player1 attacks which will fail
+		// player1 attacks 
 		pAttack.add("3");
 		pAttack.add("1,4");
 
@@ -66,7 +66,7 @@ public class ConsoleInput implements ScannerInput {
 		pAttack.add("3");
 		pAttack.add("4,4");
 
-		// player1 attacks which will fail
+		// player1 attacks 
 		pAttack.add("3");
 		pAttack.add("2,2");
 
@@ -74,7 +74,7 @@ public class ConsoleInput implements ScannerInput {
 		pAttack.add("3");
 		pAttack.add("4,4");
 
-		// player1 attacks which will fail
+		// player1 attacks 
 		pAttack.add("3");
 		pAttack.add("2,3");
 
@@ -82,7 +82,7 @@ public class ConsoleInput implements ScannerInput {
 		pAttack.add("3");
 		pAttack.add("4,4");
 
-		// player1 attacks which will fail
+		// player1 attacks
 		pAttack.add("3");
 		pAttack.add("2,4");
 
@@ -90,7 +90,7 @@ public class ConsoleInput implements ScannerInput {
 		pAttack.add("3");
 		pAttack.add("4,4");
 
-		// player1 attacks which will fail
+		// player1 attacks 
 		pAttack.add("3");
 		pAttack.add("3,1");
 
@@ -98,7 +98,7 @@ public class ConsoleInput implements ScannerInput {
 		pAttack.add("3");
 		pAttack.add("4,4");
 
-		// player1 attacks which will fail
+		// player1 attacks 
 		pAttack.add("3");
 		pAttack.add("3,2");
 
@@ -106,7 +106,7 @@ public class ConsoleInput implements ScannerInput {
 		pAttack.add("3");
 		pAttack.add("4,4");
 
-		// player1 attacks which will fail
+		// player1 attacks 
 		pAttack.add("3");
 		pAttack.add("3,3");
 
@@ -180,6 +180,96 @@ public class ConsoleInput implements ScannerInput {
 		p2Ships.add("-3,1 3,2 3,3");
 		p2Ships.add("-3,1 3,2 3,3");
 		p2Ships.add("-3,1 3,2 3,3");
+
+		// add all lists to a list of inputs
+		listOfInputs = new ArrayList<ArrayList<String>>();
+
+		listOfInputs.add(p1Ships);
+		listOfInputs.add(p2Ships);
+		listOfInputs.add(pAttack);
+	}
+
+	public void failedAttackCordsTest() {
+		lastInputProvided = 0;
+		providedInputs = 0;
+
+		p1Ships = new ArrayList<String>();
+		p2Ships = new ArrayList<String>();
+		pAttack = new ArrayList<String>();
+
+		// ships for player 1
+		p1Ships.add("1,2 1,3 1,4");
+		p1Ships.add("2,2 2,3 2,4");
+		p1Ships.add("3,1 3,2 3,3");
+
+		// ships for player 2
+		p2Ships.add("1,2 1,3 1,4");
+		p2Ships.add("2,2 2,3 2,4");
+		p2Ships.add("3,1 3,2 3,3");
+
+		// Player 1 attack
+		pAttack.add("3");
+		pAttack.add("-3,2");
+		pAttack.add("-3,2");
+		pAttack.add("-3,2");
+
+		// Player 2 attack
+		pAttack.add("3");
+		pAttack.add("1,2");
+
+		// Player 1 attack
+		pAttack.add("3");
+		pAttack.add("-3,2");
+		pAttack.add("-3,2");
+		pAttack.add("-3,2");
+
+		// Player 2 attack
+		pAttack.add("3");
+		pAttack.add("1,3");
+
+		// Player 1 attack
+		pAttack.add("3");
+		pAttack.add("-3,2");
+		pAttack.add("-3,2");
+		pAttack.add("-3,2");
+
+		// add all lists to a list of inputs
+		listOfInputs = new ArrayList<ArrayList<String>>();
+
+		listOfInputs.add(p1Ships);
+		listOfInputs.add(p2Ships);
+		listOfInputs.add(pAttack);
+	}
+	
+	public void testingVisualitzationBoards() {
+		lastInputProvided = 0;
+		providedInputs = 0;
+
+		p1Ships = new ArrayList<String>();
+		p2Ships = new ArrayList<String>();
+		pAttack = new ArrayList<String>();
+
+		// ships for player 1
+		p1Ships.add("1,2 1,3 1,4");
+		p1Ships.add("2,2 2,3 2,4");
+		p1Ships.add("3,1 3,2 3,3");
+
+		// ships for player 2
+		p2Ships.add("4,2 4,3 4,4");
+		p2Ships.add("5,2 5,3 5,4");
+		p2Ships.add("6,1 6,2 6,3");
+
+		// Player 1 see his board and enemi board
+		pAttack.add("1");
+		pAttack.add("2");
+		pAttack.add("7");
+		pAttack.add("3");
+		pAttack.add("2,2");
+
+		// Player 2 see his board and enemi board
+		pAttack.add("1");
+		pAttack.add("2");
+		pAttack.add("4");
 
 		// add all lists to a list of inputs
 		listOfInputs = new ArrayList<ArrayList<String>>();

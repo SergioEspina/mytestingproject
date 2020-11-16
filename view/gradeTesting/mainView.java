@@ -46,6 +46,8 @@ public class mainView {
 	
 	public static void printBoard(Board b) {
 		
+		o.println("Printing board: ");
+		
 		for(int i=0; i<= b.rowSize; i++) {
 			o.println();
 			for(int j=0; j<= b.colSize; j++) {
@@ -55,12 +57,35 @@ public class mainView {
 				}else {
 					stringPrint = b.getBoard()[i][j].isTouched(new Coordinate(i,j)) ? "2" : "1";
 				}
-				System.out.print("|" + stringPrint + "|");
+				o.print("|" + stringPrint + "|");
 			}
 			
 			o.println();
 			System.out.print("");
-			for(int j=0; j<=b.colSize; j++) System.out.print(" _ ");
+			for(int j=0; j<=b.colSize; j++) o.print(" _ ");
+			o.println();
+		}
+	}
+	
+public static void printEnemiBoard(Board b) {
+		
+		o.println("Printing enemy board: ");
+		
+		for(int i=0; i<= b.rowSize; i++) {
+			o.println();
+			for(int j=0; j<= b.colSize; j++) {
+				String stringPrint;
+				if(b.getBoard()[i][j] == null) {
+					stringPrint = "0";
+				}else {
+					stringPrint = b.getBoard()[i][j].isTouched(new Coordinate(i,j)) ? "2" : "1";
+				}
+				o.print("|" + stringPrint + "|");
+			}
+			
+			o.println();
+			System.out.print("");
+			for(int j=0; j<=b.colSize; j++) o.print(" _ ");
 			o.println();
 		}
 	}

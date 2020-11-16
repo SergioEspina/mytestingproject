@@ -90,6 +90,8 @@ public class playerControllerTest {
 		assertEquals(validOutput, true);
 
 		ob.reset();
+		
+		pc.play();
 
 	}
 
@@ -165,6 +167,96 @@ public class playerControllerTest {
 
 		validOutput = validOutput && buffer.get(buffer.size() - 2).contains("1 was eliminated");
 
+		assertEquals(validOutput, true);
+
+		ob.reset();
+
+	}
+	
+	/*
+	 * Test 
+	 */
+	@Test
+	public void failedAttackCordsTest() throws Exception { // prove turn lost and surrender
+
+		ConsoleInput ci = new ConsoleInput();
+		ci.failedAttackCordsTest();
+		OutputBuffer ob = new OutputBuffer();
+		ArrayList<String> buffer;
+
+		playerController pc = new playerController(10, 10, ci, ob);
+
+		// create player 1
+		pc.createPlayer();
+
+		buffer = ob.getBuffer();
+
+		ob.reset();
+
+		// create player 2
+		pc.createPlayer();
+
+		buffer = ob.getBuffer();
+
+		ob.reset();
+
+		// play the game
+		pc.play();
+
+		buffer = ob.getBuffer();
+
+		boolean validOutput = buffer.get(46).contains("Turn lost");
+
+		validOutput = validOutput && buffer.get(buffer.size() - 3).contains("exceded");
+
+		validOutput = validOutput && buffer.get(buffer.size() - 2).contains("1 was eliminated");
+		
+		validOutput = validOutput && buffer.get(buffer.size() - 1).contains("2 wins");
+		assertEquals(validOutput, true);
+
+		ob.reset();
+
+	}
+	
+	@Test
+	public void testingVisualitzationBoards() throws Exception { // prove turn lost and surrender
+
+		ConsoleInput ci = new ConsoleInput();
+		ci.testingVisualitzationBoards();
+		OutputBuffer ob = new OutputBuffer();
+		ArrayList<String> buffer;
+
+		playerController pc = new playerController(10, 10, ci, ob);
+
+		// create player 1
+		pc.createPlayer();
+
+		buffer = ob.getBuffer();
+
+		ob.reset();
+
+		// create player 2
+		pc.createPlayer();
+
+		buffer = ob.getBuffer();
+
+		ob.reset();
+
+		// play the game
+		pc.play();
+
+		buffer = ob.getBuffer();
+
+		boolean validOutput = buffer.get(5).contains("Printing board: ");
+		
+		validOutput = validOutput && buffer.get(10).contains("0");
+		validOutput = validOutput && buffer.get(19).contains("_");
+		validOutput = validOutput && buffer.get(29).contains("1");
+		validOutput = validOutput && buffer.get(211).contains("Printing enemy board: ");
+		validOutput = validOutput && buffer.get(629).contains("Player 2");
+		validOutput = validOutput && buffer.get(643).contains("0");
+		validOutput = validOutput && buffer.get(646).contains("_");
+				
 		assertEquals(validOutput, true);
 
 		ob.reset();

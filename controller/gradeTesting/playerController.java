@@ -113,35 +113,33 @@ public class playerController {
 			Player p1 = players.get(0);
 			Player p2 = players.get(1);
 			
-			boolean correct = false;
+			boolean passTurn = false;
 			
 			while(!isOver() && players.size()>1) {
 				
-				correct = false;
+				passTurn = false;
 				
-				while(!correct) {
+				while(!passTurn) {
 					
 					view.printMenu(p1);
 					
-					correct = selectAction(p1, p2);
+					passTurn = selectAction(p1, p2);
 					
 					if(isOver()) {
-						correct = true;
+						passTurn = true;
 						continue;
 					}
 					
-					if(correct) {
+					if(passTurn && !isOver()) {
 						
 						Player temp = p1;
 						p1=p2;
 						p2 = temp;
-						correct = true;
+						passTurn = true;
 						
 					}else { //prove if player must be eliminated of the game for failed turns
-						Player temp = p1;
-						p1=p2;
-						p2 = temp;
-						correct = false;					
+						
+						passTurn = false;					
 					}
 
 				}
@@ -174,6 +172,9 @@ public class playerController {
 				surrender(p1);
 				res = true;
 				break;
+			default:
+				res = false;
+				break;
 		}
 		
 		return res;	
@@ -184,7 +185,7 @@ public class playerController {
 	}
 	
 	public void printEnemiBoard(Player p) {
-		view.printBoard(p.getEnemiBoard());
+		view.printEnemiBoard(p.getEnemiBoard());
 	}
 	
 	public boolean attack(Player p1, Player p2) {
@@ -223,11 +224,15 @@ public class playerController {
 				
 				if(failedCords >= MAX_FAILED_ATTEMPT) {
 					output.println("Turn lost.");
+					p1.setFailedTurns(p1.getFailedTurns() + 1);
+					
 					if(p1.getFailedTurns() >= MAX_FAILED_TURNS) {
 						output.println("You exceded the maximun number of attempts");
+						surrender(p1);
+						return true;
 					}
-					p1.setFailedTurns(p1.getFailedTurns() + 1);
-					return false;
+					
+					return true;
 				}
 				output.println("Coordinates not valid, try again you have " + (MAX_FAILED_ATTEMPT - failedCords) + " more attempts.");
 							
@@ -235,7 +240,7 @@ public class playerController {
 			
 		}
 		
-		return false;
+		return true;
 	}
 	
 	public void surrender(Player p1) {
