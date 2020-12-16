@@ -9,7 +9,7 @@ public class playerController {
 	private int boardRows;
 	private int boardCols;
 	private boolean over;
-	private static mainView view;
+	static mainView view;
 	private ScannerInput in;
 	private int nShips;
 	private CustomOutput output;
@@ -252,8 +252,8 @@ public class playerController {
 	
 	public static void main(String[] args) throws Exception {
 		
-		ScannerInput in = new ScannerConsole(System.in);
 		ConsoleOutput co = new ConsoleOutput();
+		ScannerInput in = new ScannerConsole(System.in);		
 		
 		playerController controller = new playerController(10,10, in, co);
 		controller.view.prepareGame();
